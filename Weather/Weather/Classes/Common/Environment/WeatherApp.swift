@@ -10,8 +10,10 @@ import SwiftUI
 @main
 struct WeatherApp: App {
     var body: some Scene {
-        WindowGroup {
+        let appEnvironment = AppEnvironment.bootstrap()
+        return WindowGroup {
             ContentView()
+                .environment(\.dependencyInjector, appEnvironment.container)
         }
     }
 }

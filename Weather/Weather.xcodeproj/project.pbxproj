@@ -16,6 +16,12 @@
 		EAD5D8B5257A601B00A7773C /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5D8B3257A601B00A7773C /* Assets.swift */; };
 		EAD5D8B6257A601B00A7773C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5D8B4257A601B00A7773C /* Fonts.swift */; };
 		EAD5D8C0257A615200A7773C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD5D8BF257A615200A7773C /* Assets.xcassets */; };
+		EAD5D8CE257A647A00A7773C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5D8CD257A647A00A7773C /* Store.swift */; };
+		EAD5D8D3257A64E300A7773C /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5D8D2257A64E300A7773C /* CancelBag.swift */; };
+		EAD5D8DC257A669D00A7773C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5D8DB257A669D00A7773C /* AppEnvironment.swift */; };
+		EAD5D8E0257A66DE00A7773C /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5D8DF257A66DE00A7773C /* DependencyInjector.swift */; };
+		EAD5D8E4257A692000A7773C /* DataManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5D8E3257A692000A7773C /* DataManagers.swift */; };
+		EAD5D8E8257A698400A7773C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5D8E7257A698400A7773C /* AppState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +39,12 @@
 		EAD5D8B3257A601B00A7773C /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		EAD5D8B4257A601B00A7773C /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		EAD5D8BF257A615200A7773C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Weather/Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		EAD5D8CD257A647A00A7773C /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		EAD5D8D2257A64E300A7773C /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
+		EAD5D8DB257A669D00A7773C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		EAD5D8DF257A66DE00A7773C /* DependencyInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
+		EAD5D8E3257A692000A7773C /* DataManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagers.swift; sourceTree = "<group>"; };
+		EAD5D8E7257A698400A7773C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +129,8 @@
 		EAD5D89F257A5E9A00A7773C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				33AAFDA52578EBE1006FD448 /* WeatherApp.swift */,
-				33AAFDA72578EBE1006FD448 /* ContentView.swift */,
+				EAD5D8D1257A64CF00A7773C /* Common */,
+				EAD5D8DA257A668700A7773C /* Screens */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -136,6 +148,52 @@
 			children = (
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		EAD5D8CC257A641000A7773C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EAD5D8CD257A647A00A7773C /* Store.swift */,
+				EAD5D8D2257A64E300A7773C /* CancelBag.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EAD5D8D1257A64CF00A7773C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EAD5D8E2257A673F00A7773C /* DependencyInjection */,
+				EAD5D8D9257A666900A7773C /* Environment */,
+				EAD5D8CC257A641000A7773C /* Utilities */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		EAD5D8D9257A666900A7773C /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				33AAFDA52578EBE1006FD448 /* WeatherApp.swift */,
+				EAD5D8DB257A669D00A7773C /* AppEnvironment.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		EAD5D8DA257A668700A7773C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				33AAFDA72578EBE1006FD448 /* ContentView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		EAD5D8E2257A673F00A7773C /* DependencyInjection */ = {
+			isa = PBXGroup;
+			children = (
+				EAD5D8DF257A66DE00A7773C /* DependencyInjector.swift */,
+				EAD5D8E3257A692000A7773C /* DataManagers.swift */,
+				EAD5D8E7257A698400A7773C /* AppState.swift */,
+			);
+			path = DependencyInjection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,9 +313,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD5D8E0257A66DE00A7773C /* DependencyInjector.swift in Sources */,
+				EAD5D8E8257A698400A7773C /* AppState.swift in Sources */,
+				EAD5D8DC257A669D00A7773C /* AppEnvironment.swift in Sources */,
+				EAD5D8CE257A647A00A7773C /* Store.swift in Sources */,
 				EAD5D8B6257A601B00A7773C /* Fonts.swift in Sources */,
+				EAD5D8D3257A64E300A7773C /* CancelBag.swift in Sources */,
 				33AAFDA82578EBE1006FD448 /* ContentView.swift in Sources */,
 				33AAFDA62578EBE1006FD448 /* WeatherApp.swift in Sources */,
+				EAD5D8E4257A692000A7773C /* DataManagers.swift in Sources */,
 				EAD5D8B5257A601B00A7773C /* Assets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
