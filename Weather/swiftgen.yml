@@ -1,0 +1,14 @@
+input_dir: 'Weather/Resources/'
+output_dir: 'Weather/Resources/Generated'
+xcassets:
+  inputs:
+    - Images.xcassets
+    - Colors.xcassets
+  outputs:
+    - templateName: swift5
+      output: Assets.swift
+fonts:
+  inputs: Fonts
+  outputs:
+    templateName: swift5
+    output: Fonts.swift
