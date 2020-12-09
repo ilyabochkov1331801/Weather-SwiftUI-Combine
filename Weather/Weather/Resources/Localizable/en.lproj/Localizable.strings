@@ -5,3 +5,12 @@
   Created by Alena Nesterkina on 3.12.20.
   
 */
+
+//MARK: - Errors
+
+//Service
+noLocationPermission_key = "You've denied location authorization.";
+locationNil_key = "Something went wrong.";
+placeMarkNil = "Can't get city name";
+
+invalidUrl_key = "Invalid url.";
