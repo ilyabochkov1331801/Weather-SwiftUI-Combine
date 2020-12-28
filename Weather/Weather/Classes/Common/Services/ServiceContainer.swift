@@ -15,5 +15,9 @@ extension DependencyInjector {
         init(weatherService: WeatherServiceProtocol) {
             self.weatherService = weatherService
         }
+        
+        static var stub: Self {
+            .init(weatherService: WeatherService(locationProvider: LocationProvider()))
+        }
     }
 }

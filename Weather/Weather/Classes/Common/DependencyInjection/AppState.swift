@@ -35,7 +35,14 @@ extension AppState {
 
 extension AppState {
     struct Permissions: Equatable {
-        
+        var location: Permission.Status = .unknown
+    }
+    static func permissionKeyPath(for permission: Permission) -> WritableKeyPath<AppState, Permission.Status> {
+        let pathToPermissions = \AppState.permissions
+        switch permission {
+        case .location:
+            return pathToPermissions.appending(path: \.location)
+        }
     }
 }
 

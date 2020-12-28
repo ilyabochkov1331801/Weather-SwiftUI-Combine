@@ -14,6 +14,6 @@ struct AppEnvironment {
 extension AppEnvironment {
     static func bootstrap() -> AppEnvironment {
         AppEnvironment(container: DependencyInjector(appState: AppState(),
-                                                     dataManagers: DependencyInjector.DataManagers()))
+                                                     dataManagers: DependencyInjector.DataManagers(), services: DependencyInjector.Services.stub))
     }
 }

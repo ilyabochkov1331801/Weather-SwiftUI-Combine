@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.dependencyInjector) var dep: DependencyInjector
+    
     var body: some View {
         Text("Hello, world!")
             .padding()

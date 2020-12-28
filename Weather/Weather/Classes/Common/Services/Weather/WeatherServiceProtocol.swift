@@ -9,6 +9,5 @@ import Foundation
 import Combine
 
 protocol WeatherServiceProtocol {
-    func getCityInfo(completion: @escaping (Result<String, Error>) -> Void)
-    func getDailyWeather() -> AnyPublisher<Data, Error>
+    func getDailyWeather() -> AnyPublisher<WeatherEndpoint.EndpointData.Target, Error>
 }

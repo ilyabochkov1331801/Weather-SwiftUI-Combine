@@ -9,39 +9,27 @@ import Foundation
 import Combine
 
 class APIProvider<Endpoint: EndpointProtocol> {
-    func getData(by endpoint: Endpoint) -> AnyPublisher<Data, Error> {
-        guard let request = performRequest(for: endpoint) else {
-            return Fail(error: ApiProviderErrors.invalidUrl)
+    func getData(by endpoint: Endpoint) -> AnyPublisher<Endpoint.EndpointData.Target, Error> {
+        guard let request = endpoint.asRequest() else {
+            return Fail(error: APIProvider.Errors.invalidRequest)
                 .eraseToAnyPublisher()
         }
-        return loadData(by: request)
+        return request.execute()
+            .decode(type: Endpoint.EndpointData.self, decoder: JSONDecoder())
+            .flatMap { $0.convert() }
             .eraseToAnyPublisher()
     }
-    
-    //MARK: - perform request
-    private func performRequest(for endpoint: Endpoint) -> URLRequest? {
-        var components = URLComponents()
-        components.scheme = endpoint.scheme
-        components.host = endpoint.host
-        components.path = endpoint.path
+}
+
+extension APIProvider {
+    enum Errors: Error, LocalizedError {
+        case invalidRequest
         
-        components.queryItems = endpoint.params.compactMap({ parameter -> URLQueryItem in
-            return URLQueryItem(name: parameter.key, value: parameter.value)
-        })
-        
-        guard let url = components.url else {
-            return nil
-        }
-        
-        return URLRequest(url: url)
-    }
-    
-    private func loadData(by request: URLRequest) -> AnyPublisher<Data, Error> {
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .mapError { error -> Error in
-                error
+        var errorDescription: String? {
+            switch self {
+            case .invalidRequest:
+                return L10n.invalidRequestKey
             }
-            .map { $0.data }
-            .eraseToAnyPublisher()
+        }
     }
 }

@@ -9,20 +9,14 @@ import Foundation
 
 enum WeatherEndpoint: EndpointProtocol {
     case getForecastWeather(latitude: Double, longtitude: Double)
-    var scheme: String {
-        return "https"
-    }
-    var host: String {
-       return "api.openweathermap.org"
-    }
+    
+    typealias EndpointData = ForecastAPI
+    
     var path: String {
         switch self {
         case .getForecastWeather:
-            return "/data/2.5" + "/forecast"
+            return "/forecast"
         }
-    }
-    var key: String {
-        return "c2d3e894f8515e4d514e9b3b541e1881"
     }
     
     var params: [String : String] {
@@ -31,4 +25,10 @@ enum WeatherEndpoint: EndpointProtocol {
             return ["lat": String(latitude), "lon": String(longtitude), "mode": "json", "units": "metric", "APPID": key]
         }
     }
+}
+
+extension WeatherEndpoint {
+    var scheme: String { "https" }
+    var host: String { "api.openweathermap.org/data/2.5" }
+    var key: String { "c2d3e894f8515e4d514e9b3b541e1881" }
 }

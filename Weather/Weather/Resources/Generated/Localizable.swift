@@ -10,13 +10,13 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  /// Invalid url.
-  internal static let invalidUrlKey = L10n.tr("Localizable", "invalidUrl_key")
+  /// Invalid request.
+  internal static let invalidRequestKey = L10n.tr("Localizable", "invalidRequestKey")
   /// Something went wrong.
-  internal static let locationNilKey = L10n.tr("Localizable", "locationNil_key")
+  internal static let locationNilKey = L10n.tr("Localizable", "locationNilKey")
   /// You've denied location authorization.
-  internal static let noLocationPermissionKey = L10n.tr("Localizable", "noLocationPermission_key")
-  /// Can't get city name
+  internal static let noLocationPermissionKey = L10n.tr("Localizable", "noLocationPermissionKey")
+  /// Can't get city name.
   internal static let placeMarkNil = L10n.tr("Localizable", "placeMarkNil")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
