@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 struct CityAPI: Codable {
-    let id: String
+    let id: Int
     let coordinates: CoordinatesAPI
     let country: String
     let timezone: Int

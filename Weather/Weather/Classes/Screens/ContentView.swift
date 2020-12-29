@@ -9,15 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.dependencyInjector) private var dependencyInjector: DependencyInjector
-    @State private var text: String = ""
-    @ObservedObject private(set) var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
-            Text(text)
-                .padding()
-            Button("Tap") {
-                viewModel.showForecast()
+            ScrollView {
+                Text(viewModel.weather.debugDescription)
+                    .padding()
+                Button("Tap") {
+                    viewModel.showForecast()
+                }
             }
         }
     }
@@ -25,6 +26,8 @@ struct ContentView: View {
     class ViewModel: ObservableObject {
         private let weatherService: WeatherService
         private let cancelBag: CancelBag
+    
+        @Published var weather: Weather?
         
         init(weatherService: WeatherService) {
             self.weatherService = weatherService
@@ -32,12 +35,13 @@ struct ContentView: View {
         }
         
         func showForecast() {
-            weatherService.getDailyWeather()
-                .sink {
-                    print($0)
-                } receiveValue: {
-                    print($0)
-                }.store(in: cancelBag)
+            weatherService
+                .getDailyWeather()
+                .map { $0.weather.first }
+                .eraseToAnyPublisher()
+                .replaceError(with: nil)
+                .assign(to: \.weather, on: self)
+                .store(in: cancelBag)
         }
     }
 }

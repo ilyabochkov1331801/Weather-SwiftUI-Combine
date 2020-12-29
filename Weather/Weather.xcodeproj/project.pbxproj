@@ -35,7 +35,6 @@
 		EA8877E6257A8C6600CA0431 /* WeatherStateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8877E5257A8C6600CA0431 /* WeatherStateAPI.swift */; };
 		EA8877EA257A8D4200CA0431 /* CloudsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8877E9257A8D4200CA0431 /* CloudsAPI.swift */; };
 		EA8877ED257A8DE300CA0431 /* WindAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8877EC257A8DE300CA0431 /* WindAPI.swift */; };
-		EA8877F0257A8F0F00CA0431 /* RainAvaliabilityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8877EF257A8F0F00CA0431 /* RainAvaliabilityAPI.swift */; };
 		EA8877F3257A8FC600CA0431 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8877F2257A8FC600CA0431 /* WeatherAPI.swift */; };
 		EA8877F8257A91A000CA0431 /* ForecastAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8877F7257A91A000CA0431 /* ForecastAPI.swift */; };
 		EAD5D8A8257A5F6A00A7773C /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = EAD5D8A7257A5F6900A7773C /* swiftgen.yml */; };
@@ -85,7 +84,6 @@
 		EA8877E5257A8C6600CA0431 /* WeatherStateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStateAPI.swift; sourceTree = "<group>"; };
 		EA8877E9257A8D4200CA0431 /* CloudsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudsAPI.swift; sourceTree = "<group>"; };
 		EA8877EC257A8DE300CA0431 /* WindAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindAPI.swift; sourceTree = "<group>"; };
-		EA8877EF257A8F0F00CA0431 /* RainAvaliabilityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainAvaliabilityAPI.swift; sourceTree = "<group>"; };
 		EA8877F2257A8FC600CA0431 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		EA8877F7257A91A000CA0431 /* ForecastAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAPI.swift; sourceTree = "<group>"; };
 		EAD5D8A7257A5F6900A7773C /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
@@ -299,7 +297,6 @@
 				EA8877E5257A8C6600CA0431 /* WeatherStateAPI.swift */,
 				EA8877E9257A8D4200CA0431 /* CloudsAPI.swift */,
 				EA8877EC257A8DE300CA0431 /* WindAPI.swift */,
-				EA8877EF257A8F0F00CA0431 /* RainAvaliabilityAPI.swift */,
 				EA8877F2257A8FC600CA0431 /* WeatherAPI.swift */,
 				EA8877F7257A91A000CA0431 /* ForecastAPI.swift */,
 			);
@@ -520,7 +517,6 @@
 				33B035882594F3CC00398E4D /* LocationPermissionService.swift in Sources */,
 				EAD5D8B6257A601B00A7773C /* Fonts.swift in Sources */,
 				EAD5D8D3257A64E300A7773C /* CancelBag.swift in Sources */,
-				EA8877F0257A8F0F00CA0431 /* RainAvaliabilityAPI.swift in Sources */,
 				EA8877DF257A872400CA0431 /* CoordinatesAPI.swift in Sources */,
 				EA8877D8257A84DD00CA0431 /* Weather.swift in Sources */,
 				EA8877EA257A8D4200CA0431 /* CloudsAPI.swift in Sources */,

@@ -14,10 +14,11 @@ class APIProvider {
             return Fail(error: APIProvider.Errors.invalidRequest)
                 .eraseToAnyPublisher()
         }
-        
+            
         return request.execute()
             .decode(type: Endpoint.EndpointData.self, decoder: JSONDecoder())
             .flatMap { $0.convert() }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }
