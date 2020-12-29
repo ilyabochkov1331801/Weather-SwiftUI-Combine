@@ -15,7 +15,7 @@ enum WeatherEndpoint: EndpointProtocol {
     var path: String {
         switch self {
         case .getForecastWeather:
-            return "/forecast"
+            return "/data/2.5" + "/forecast"
         }
     }
     
@@ -29,6 +29,6 @@ enum WeatherEndpoint: EndpointProtocol {
 
 extension WeatherEndpoint {
     var scheme: String { "https" }
-    var host: String { "api.openweathermap.org/data/2.5" }
+    var host: String { "api.openweathermap.org" }
     var key: String { "c2d3e894f8515e4d514e9b3b541e1881" }
 }
