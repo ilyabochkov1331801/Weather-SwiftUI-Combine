@@ -12,8 +12,13 @@ struct WeatherApp: App {
     var body: some Scene {
         let appEnvironment = AppEnvironment.bootstrap()
         return WindowGroup {
-            ContentView()
-                .environment(\.dependencyInjector, appEnvironment.container)
+            ContentView(
+                viewModel: ContentView.ViewModel(
+                    weatherService: WeatherService(locationProvider: appEnvironment.container.providers.locationProvider,
+                                                   apiProvider: appEnvironment.container.providers.apiProvider)
+                )
+            )
+            .environment(\.dependencyInjector, appEnvironment.container)
         }
     }
 }

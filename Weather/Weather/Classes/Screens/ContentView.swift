@@ -8,16 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.dependencyInjector) var dep: DependencyInjector
+    @Environment(\.dependencyInjector) private var dependencyInjector: DependencyInjector
+    @State private var text: String = ""
+    @ObservedObject private(set) var viewModel: ViewModel
     
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Text(text)
+                .padding()
+            Button("Tap") {
+                viewModel.showForecast()
+            }
+        }
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    
+    class ViewModel: ObservableObject {
+        private let weatherService: WeatherService
+        private let cancelBag: CancelBag
+        
+        init(weatherService: WeatherService) {
+            self.weatherService = weatherService
+            cancelBag = CancelBag()
+        }
+        
+        func showForecast() {
+            weatherService.getDailyWeather()
+                .sink {
+                    print($0)
+                } receiveValue: {
+                    print($0)
+                }.store(in: cancelBag)
+        }
     }
 }

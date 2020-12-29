@@ -10,22 +10,26 @@ import Foundation
 import Combine
 
 class WeatherService: WeatherServiceProtocol {
-    private let apiProvider = APIProvider<WeatherEndpoint>()
-    private var city: String?
+    private let apiProvider: APIProvider
+    private let locationProvider: LocationProvider
     
-    let locationProvider: LocationProvider
-    
-    init(locationProvider: LocationProvider) {
+    init(locationProvider: LocationProvider, apiProvider: APIProvider) {
         self.locationProvider = locationProvider
+        self.apiProvider = apiProvider
     }
     
     func getDailyWeather() -> AnyPublisher<WeatherEndpoint.EndpointData.Target, Error> {
-        guard CLLocationManager.locationServicesEnabled(),
-              let location = locationProvider.locationManager.location else {
-            return Fail(error: WeatherService.Errors.noLocationPermission)
-                .eraseToAnyPublisher()
-        }
-        return apiProvider.getData(by: .getForecastWeather(latitude: location.coordinate.latitude, longtitude: location.coordinate.longitude))
+        locationProvider
+            .location
+            .flatMap {
+                self.apiProvider.execute(
+                    endpoint: WeatherEndpoint.getForecastWeather(
+                        latitude: $0.coordinate.latitude,
+                        longtitude: $0.coordinate.longitude
+                    )
+                )
+            }
+            .eraseToAnyPublisher()
     }
 }
 

@@ -8,12 +8,13 @@
 import Foundation
 import Combine
 
-class APIProvider<Endpoint: EndpointProtocol> {
-    func getData(by endpoint: Endpoint) -> AnyPublisher<Endpoint.EndpointData.Target, Error> {
+class APIProvider {
+    func execute<Endpoint: EndpointProtocol>(endpoint: Endpoint) -> AnyPublisher<Endpoint.EndpointData.Target, Error> {
         guard let request = endpoint.asRequest() else {
             return Fail(error: APIProvider.Errors.invalidRequest)
                 .eraseToAnyPublisher()
         }
+        
         return request.execute()
             .decode(type: Endpoint.EndpointData.self, decoder: JSONDecoder())
             .flatMap { $0.convert() }

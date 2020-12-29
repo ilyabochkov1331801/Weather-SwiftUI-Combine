@@ -9,66 +9,62 @@ import Combine
 import CoreLocation
 import Foundation
 
-class LocationProvider: LocationProviderProtocol {
-    private let geoCoder = CLGeocoder()
-    let locationManager = CLLocationManager()
+class LocationProvider: NSObject, LocationProviderProtocol {
+    private let locationManager: CLLocationManager
+    private let locationSubject: CurrentValueSubject<CLLocation?, Error>
+    private var authorizationStatus: CLAuthorizationStatus?
     
-    var location: CLLocation?
+    var location: AnyPublisher<CLLocation, Error> {
+        locationSubject
+            .compactMap { $0 }
+            .eraseToAnyPublisher()
+    }
     
-    init() {
-        self.location = locationManager.location
+    override init() {
+        locationSubject = CurrentValueSubject<CLLocation?, Error>(nil)
+        locationManager = CLLocationManager()
+        
+        super.init()
+        
+        authorizationStatus = locationManager.authorizationStatus
         startUpdatingLocation()
     }
     
     deinit {
         stopUpdatingLocation()
     }
-    
-    func getCityInfo() -> AnyPublisher<String, Error> {
-        guard let location = location else {
-            return Fail(error: WeatherService.Errors.locationNil)
-                .eraseToAnyPublisher()
-        }
+}
 
-        return reverseGeocodeLocation(location)
-            .eraseToAnyPublisher()
+extension LocationProvider: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationSubject.send(locations.first)
     }
     
-    func askForPermission() {
-        locationManager.requestWhenInUseAuthorization()
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationSubject.send(completion: .failure(error))
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = manager.authorizationStatus
     }
 }
 
-extension LocationProvider {
-    private func reverseGeocodeLocation(_ location: CLLocation) -> Future<String, Error> {
-        return Future { promise in
-            self.geoCoder.reverseGeocodeLocation(location ) { placemarks, error in
-                if let error = error {
-                    return promise(.failure(error))
-                }
-                
-                guard let placemark = placemarks?.first,
-                      let city = placemark.locality else {
-                    return promise(.failure(WeatherService.Errors.placeMarkNil))
-                }
-                return promise(.success(city))
-            }
+private extension LocationProvider {
+    func askForPermissionIfNeed() {
+        switch authorizationStatus {
+        case .some(.authorizedAlways), .some(.authorizedWhenInUse): break
+        default: locationManager.requestWhenInUseAuthorization()
         }
     }
-}
-
-extension LocationProvider {
+    
     func startUpdatingLocation() {
-        locationManager.requestWhenInUseAuthorization()
-        
-        guard CLLocationManager.locationServicesEnabled() else {
-            return
-        }
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        askForPermissionIfNeed()
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func stopUpdatingLocation() {
-        locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
     }
 }

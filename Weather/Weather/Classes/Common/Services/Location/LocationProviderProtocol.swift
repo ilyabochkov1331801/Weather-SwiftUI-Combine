@@ -9,9 +9,6 @@ import Combine
 import CoreLocation
 import Foundation
 
-protocol LocationProviderProtocol {
-    var location: CLLocation? { get }
-    
-    func getCityInfo() -> AnyPublisher<String, Error>
-    func askForPermission()
+protocol LocationProviderProtocol: NSObject {
+    var location: AnyPublisher<CLLocation, Error> { get }
 }
