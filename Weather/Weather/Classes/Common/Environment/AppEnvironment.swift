@@ -13,7 +13,6 @@ struct AppEnvironment {
 
 extension AppEnvironment {
     static func bootstrap() -> AppEnvironment {
-        AppEnvironment(container: DependencyInjector(appState: AppState(),
-                                                     dataManagers: DependencyInjector.DataManagers()))
+        AppEnvironment(container: .defaultValue)
     }
 }

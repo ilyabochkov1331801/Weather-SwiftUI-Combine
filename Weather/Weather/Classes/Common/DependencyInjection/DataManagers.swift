@@ -8,7 +8,17 @@
 import Combine
 
 extension DependencyInjector {
-    struct DataManagers {
+    class Providers {
+        let locationProvider: LocationProvider
+        let apiProvider: APIProvider
         
+        init(locationProvider: LocationProvider, apiProvider: APIProvider) {
+            self.locationProvider = locationProvider
+            self.apiProvider = apiProvider
+        }
+        
+        static var stub: Providers {
+            Providers(locationProvider: LocationProvider(), apiProvider: APIProvider())
+        }
     }
 }

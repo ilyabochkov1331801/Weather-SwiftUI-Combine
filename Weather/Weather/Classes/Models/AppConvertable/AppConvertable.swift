@@ -7,7 +7,7 @@
 
 import Combine
 
-protocol AppConvertable {
+protocol AppConvertable: Codable {
     associatedtype Target: AppConvertableTarget
     func convert() -> AnyPublisher<Target, Never>
 }

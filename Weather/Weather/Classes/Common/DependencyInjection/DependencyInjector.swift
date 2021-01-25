@@ -10,20 +10,20 @@ import SwiftUI
 
 struct DependencyInjector: EnvironmentKey {
     let appState: Store<AppState>
-    let dataManagers: DataManagers
+    let providers: Providers
     
     static var defaultValue: Self { Self.default }
     
     private static let `default` = DependencyInjector(appState: AppState(),
-                                                      dataManagers: DataManagers())
+                                                      providers: .stub)
     
-    init(appState: Store<AppState>, dataManagers: DependencyInjector.DataManagers) {
+    init(appState: Store<AppState>, providers: DependencyInjector.Providers) {
         self.appState = appState
-        self.dataManagers = dataManagers
+        self.providers = providers
     }
     
-    init(appState: AppState, dataManagers: DependencyInjector.DataManagers) {
-        self.init(appState: Store(appState), dataManagers: dataManagers)
+    init(appState: AppState, providers: DependencyInjector.Providers) {
+        self.init(appState: Store(appState), providers: providers)
     }
 }
 
