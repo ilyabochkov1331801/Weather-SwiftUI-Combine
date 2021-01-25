@@ -7,19 +7,35 @@
 
 import SwiftUI
 
-struct ContentView: View {
+protocol ContentRouterProtocol: Router {
+    func presentTest()
+}
+
+struct ContentView<N: ContentRouterProtocol>: View {
     @Environment(\.dependencyInjector) private var dependencyInjector: DependencyInjector
     @StateObject var viewModel: ViewModel
+    @StateObject private var router: N
+    
+    init(router: N, viewModel: ViewModel) {
+        _router = StateObject(wrappedValue: router)
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
-        VStack {
-            ScrollView {
-                Text(viewModel.weather.debugDescription)
-                    .padding()
-                Button("Tap") {
-                    viewModel.showForecast()
+        NavigationView {
+            VStack {
+                ScrollView {
+                    Text(viewModel.weather.debugDescription)
+                        .padding()
+                    Button("Tap") {
+                        viewModel.showForecast()
+                    }
+                    Button("Go Next") {
+                        router.presentTest()
+                    }.navigation(router)
                 }
             }
+            .navigationTitle("Main")
         }
     }
     
