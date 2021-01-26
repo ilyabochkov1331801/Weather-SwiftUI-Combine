@@ -26,3 +26,4 @@ extension View {
         return self.modifier(CustomFont(name: name, size: size, weight: weight))
     }
 }
+
