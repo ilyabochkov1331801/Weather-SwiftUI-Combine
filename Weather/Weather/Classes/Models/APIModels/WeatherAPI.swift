@@ -33,11 +33,11 @@ extension WeatherAPI: AppConvertable {
     typealias Target = Weather
     
     func convert() -> AnyPublisher<Target, Never> {
-        Just(
-            Weather(temperature: mainWeatherInfo.temperature,
-                    state: Weather.State(rawValue: weatherState.first?.state ?? "") ?? .unexpected,
-                    date: Date(timeIntervalSince1970: date))
-        )
-        .eraseToAnyPublisher()
+        mainWeatherInfo.convert()
+            .map { Target(state: weatherState.first?.state ?? "",
+                          date: Date(timeIntervalSince1970: date),
+                          info: $0,
+                          wind: wind.speed) }
+            .eraseToAnyPublisher()
     }
 }

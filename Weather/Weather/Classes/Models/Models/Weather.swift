@@ -10,16 +10,10 @@ import Foundation
 typealias Deegrees = Double
 
 struct Weather {
-    
-    enum State: String {
-        case unexpected
-
-        case rain = "Rain"
-    }
-    
-    let temperature: Deegrees
-    let state: State
+    let state: String
     let date: Date
+    let info: WeatherInfo
+    let wind: Double
 }
 
 extension Weather: AppConvertableTarget { }
