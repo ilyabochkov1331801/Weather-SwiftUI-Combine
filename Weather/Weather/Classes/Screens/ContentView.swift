@@ -30,7 +30,13 @@ struct ContentView: View {
             ZStack(alignment: .center) {
                 Color(Asset.charade.name)
                     .edgesIgnoringSafeArea(.all)
-                CardPreview()
+                VStack(spacing: 20) {
+                    CardPreview()
+                        .padding()
+                    BottomButton {
+                        
+                    }
+                }
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("Today \(viewModel.getCurrentDate())", displayMode: .inline)
