@@ -30,7 +30,7 @@ struct ContentView: View {
             ZStack(alignment: .top) {
                 Color(Asset.charade.name)
                     .edgesIgnoringSafeArea(.all)
-                VStack(alignment: .center) {
+                VStack(alignment: .center, spacing: 20) {
                     CardPreview()
                         .padding()
                     LineView(data: [("00:00", -8.0),("03:00", 23.0),("06:00", 54.0),("09:00", 32.0),("12:00", 12.0),("15:00", 37.0),("18:00", -7.0),("21:00", 37.0),("24:00", 17.0)], title: "Today", legend: "Weather each 3 hours",
@@ -39,6 +39,10 @@ struct ContentView: View {
                 }
                 .offset(y: 100)
                 
+                BottomButton {
+                    
+                }
+                .offset(y: UIScreen.main.bounds.height - 100)
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("Today \(viewModel.getCurrentDate())", displayMode: .inline)
