@@ -683,7 +683,7 @@
 				33AAFE77257A844E006FD448 /* APIProvider.swift in Sources */,
 				33964B1325BEFFA90098E500 /* CGFloat + Extension.swift in Sources */,
 				33964B1025BEFF870098E500 /* ScreenDependence.swift in Sources */,
-                33DCAD5F25C04A4D005DC918 /* Helper.swift in Sources */,
+				33DCAD5F25C04A4D005DC918 /* Helper.swift in Sources */,
 				3325F69325C2A1A300BB1997 /* BottomButton.swift in Sources */,
 				33B035882594F3CC00398E4D /* LocationPermissionService.swift in Sources */,
 				EAD5D8B6257A601B00A7773C /* Fonts.swift in Sources */,
@@ -861,7 +861,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 3AQWMW5DUU;
+				DEVELOPMENT_TEAM = 6RB7NH47H2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Weather/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -884,7 +884,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 3AQWMW5DUU;
+				DEVELOPMENT_TEAM = 6RB7NH47H2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Weather/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

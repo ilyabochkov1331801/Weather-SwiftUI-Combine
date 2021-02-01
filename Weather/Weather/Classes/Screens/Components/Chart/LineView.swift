@@ -13,7 +13,6 @@ public struct LineView: View {
     public var legend: String?
     public var style: ChartStyle
     
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var showLegend = false
     @State private var dragLocation:CGPoint = .zero
     @State private var indicatorLocation: CGPoint = .zero
@@ -78,18 +77,18 @@ public struct LineView: View {
                         }
                     }
                     .frame(width: geometry.frame(in: .local).size.width, height: 200)
-                    .offset(x: 0, y: 40 )
+                    .offset(x: 0, y: 50 )
                     MagnifierRect(currentNumber: $currentDataNumber, currentString: $currentDataString)
                         .opacity(self.opacity)
-                        .offset(x: self.dragLocation.x - geometry.frame(in: .local).size.width/2, y: 36)
+                        .offset(x: self.dragLocation.x - geometry.frame(in: .local).size.width / 2, y: 60)
                 }
                 .frame(width: geometry.frame(in: .local).size.width, height: 200)
                 .gesture(DragGesture()
                 .onChanged({ value in
                     self.dragLocation = value.location
-                    self.indicatorLocation = CGPoint(x: max(value.location.x-30,0), y: 32)
+                    self.indicatorLocation = CGPoint(x: max(value.location.x - 30,0), y: 32)
                     self.opacity = 1
-                    self.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-30, height: 200)
+                    self.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width - 30, height: 200)
                     self.hideHorizontalLines = true
                 })
                     .onEnded({ value in

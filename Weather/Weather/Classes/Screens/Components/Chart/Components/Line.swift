@@ -24,7 +24,7 @@ public struct Line: View {
         if data.points.count < 2 {
             return 0
         }
-        return frame.size.width / CGFloat(data.points.count-1)
+        return frame.size.width / CGFloat(data.points.count - 1)
     }
     var stepHeight: CGFloat {
         var min: Double?
@@ -33,16 +33,16 @@ public struct Line: View {
         if minDataValue != nil && maxDataValue != nil {
             min = minDataValue!
             max = maxDataValue!
-        }else if let minPoint = points.min(), let maxPoint = points.max(), minPoint != maxPoint {
+        } else if let minPoint = points.min(), let maxPoint = points.max(), minPoint != maxPoint {
             min = minPoint
             max = maxPoint
-        }else {
+        } else {
             return 0
         }
         if let min = min, let max = max, min != max {
-            if (min <= 0){
+            if (min <= 0) {
                 return (frame.size.height-padding) / CGFloat(max - min)
-            }else{
+            } else{
                 return (frame.size.height-padding) / CGFloat(max - min)
             }
         }
@@ -67,12 +67,12 @@ public struct Line: View {
                 .animation(Animation.easeOut(duration: 1.2).delay(Double(self.index)*0.4))
                 .onAppear {
                     self.showFull = true
-            }
-            .onDisappear {
-                self.showFull = false
-            }
-            .drawingGroup()
-            if(self.showIndicator) {
+                }
+                .onDisappear {
+                    self.showFull = false
+                }
+                .drawingGroup()
+            if self.showIndicator {
                 IndicatorPoint()
                     .position(self.getClosestPointOnPath(touchLocation: self.touchLocation))
                     .rotationEffect(.degrees(180), anchor: .center)
