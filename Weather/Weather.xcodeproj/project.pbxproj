@@ -21,6 +21,11 @@
 		338C438325D1469B000B1C94 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C437625D1469B000B1C94 /* Roboto-Bold.ttf */; };
 		338C438425D1469B000B1C94 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C437725D1469B000B1C94 /* Roboto-Thin.ttf */; };
 		338C438525D1469B000B1C94 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C437825D1469B000B1C94 /* Roboto-Black.ttf */; };
+		338C43A125D14E65000B1C94 /* SheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C439E25D14E65000B1C94 /* SheetModifier.swift */; };
+		338C43A225D14E65000B1C94 /* NavigationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C439F25D14E65000B1C94 /* NavigationModifier.swift */; };
+		338C43A325D14E65000B1C94 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C43A025D14E65000B1C94 /* Router.swift */; };
+		338C43A725D14E9F000B1C94 /* ContentViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C43A525D14E9F000B1C94 /* ContentViewRouter.swift */; };
+		338C43A825D14E9F000B1C94 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C43A625D14E9F000B1C94 /* TestView.swift */; };
 		33964AE425BEE46C0098E500 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33964AE325BEE46B0098E500 /* DateService.swift */; };
 		33964AE725BEE47F0098E500 /* DateServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33964AE625BEE47F0098E500 /* DateServiceProtocol.swift */; };
 		33964AEA25BEEC9A0098E500 /* Optional + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33964AE925BEEC9A0098E500 /* Optional + Extension.swift */; };
@@ -98,6 +103,11 @@
 		338C437625D1469B000B1C94 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		338C437725D1469B000B1C94 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		338C437825D1469B000B1C94 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		338C439E25D14E65000B1C94 /* SheetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetModifier.swift; sourceTree = "<group>"; };
+		338C439F25D14E65000B1C94 /* NavigationModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationModifier.swift; sourceTree = "<group>"; };
+		338C43A025D14E65000B1C94 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		338C43A525D14E9F000B1C94 /* ContentViewRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewRouter.swift; sourceTree = "<group>"; };
+		338C43A625D14E9F000B1C94 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		33964AE325BEE46B0098E500 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		33964AE625BEE47F0098E500 /* DateServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateServiceProtocol.swift; sourceTree = "<group>"; };
 		33964AE925BEEC9A0098E500 /* Optional + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional + Extension.swift"; sourceTree = "<group>"; };
@@ -232,6 +242,24 @@
 				338C437825D1469B000B1C94 /* Roboto-Black.ttf */,
 			);
 			path = Roboto;
+			sourceTree = "<group>";
+		};
+		338C439C25D14E65000B1C94 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				338C439D25D14E65000B1C94 /* Modifiers */,
+				338C43A025D14E65000B1C94 /* Router.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		338C439D25D14E65000B1C94 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				338C439E25D14E65000B1C94 /* SheetModifier.swift */,
+				338C439F25D14E65000B1C94 /* NavigationModifier.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 		33964AE225BEE45C0098E500 /* Date */ = {
@@ -533,6 +561,7 @@
 		EAD5D8D1257A64CF00A7773C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				338C439C25D14E65000B1C94 /* Router */,
 				33AAFE74257A8417006FD448 /* Services */,
 				EAD5D8E2257A673F00A7773C /* DependencyInjection */,
 				EAD5D8D9257A666900A7773C /* Environment */,
@@ -553,6 +582,8 @@
 		EAD5D8DA257A668700A7773C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				338C43A525D14E9F000B1C94 /* ContentViewRouter.swift */,
+				338C43A625D14E9F000B1C94 /* TestView.swift */,
 				33964B0925BEFDFE0098E500 /* Components */,
 				33AAFDA72578EBE1006FD448 /* ContentView.swift */,
 			);
@@ -705,6 +736,7 @@
 			files = (
 				33DCAD5B25C04A3D005DC918 /* LineView.swift in Sources */,
 				33964B2125BF0E060098E500 /* CustomFont.swift in Sources */,
+				338C43A225D14E65000B1C94 /* NavigationModifier.swift in Sources */,
 				33964B0B25BEFEF00098E500 /* CardPreview.swift in Sources */,
 				EAD5D8E0257A66DE00A7773C /* DependencyInjector.swift in Sources */,
 				33964B1C25BF0C260098E500 /* DetailedView.swift in Sources */,
@@ -727,11 +759,15 @@
 				EAD5D8B6257A601B00A7773C /* Fonts.swift in Sources */,
 				EAD5D8D3257A64E300A7773C /* CancelBag.swift in Sources */,
 				EA8877DF257A872400CA0431 /* CoordinatesAPI.swift in Sources */,
+				338C43A325D14E65000B1C94 /* Router.swift in Sources */,
 				EA8877D8257A84DD00CA0431 /* Weather.swift in Sources */,
+				338C43A725D14E9F000B1C94 /* ContentViewRouter.swift in Sources */,
+				338C43A125D14E65000B1C94 /* SheetModifier.swift in Sources */,
 				EA8877EA257A8D4200CA0431 /* CloudsAPI.swift in Sources */,
 				33964AE725BEE47F0098E500 /* DateServiceProtocol.swift in Sources */,
 				33964AE425BEE46C0098E500 /* DateService.swift in Sources */,
 				33DCAD6E25C04B5D005DC918 /* Path + Extension.swift in Sources */,
+				338C43A825D14E9F000B1C94 /* TestView.swift in Sources */,
 				33964B1725BF006C0098E500 /* View + Extension.swift in Sources */,
 				EA8877C3257A7FB100CA0431 /* AppConvertableTarget.swift in Sources */,
 				EA8877F8257A91A000CA0431 /* ForecastAPI.swift in Sources */,

@@ -7,15 +7,20 @@
 
 import SwiftUI
 
-struct ContentView: View {
+protocol ContentRouterProtocol: Router {
+    func presentTest()
+}
+
+struct ContentView<N: ContentRouterProtocol>: View {
     @Environment(\.dependencyInjector) private var dependencyInjector: DependencyInjector
     @StateObject var viewModel: ViewModel
-    @State var trim: CGFloat = 0
+    @StateObject private var router: N
     
-    init(viewModel: ViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
-        setupUI()
+    init(router: N, viewModel: ViewModel) {
+        _router = StateObject(wrappedValue: router)
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
+    @State var trim: CGFloat = 0
     
     var menuButton: some View {
         Button(action: {
@@ -44,6 +49,7 @@ struct ContentView: View {
                 }
                 .offset(y: UIScreen.main.bounds.height - 100)
             }
+            .navigationTitle("Main")
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("Today \(viewModel.getCurrentDate())", displayMode: .inline)
             .navigationBarItems(trailing: menuButton)
