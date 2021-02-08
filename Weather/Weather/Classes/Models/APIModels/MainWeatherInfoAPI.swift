@@ -31,3 +31,19 @@ struct MainWeatherInfoAPI: Codable {
         case temperatureСoefficient = "temp_kf"
     }
 }
+
+extension MainWeatherInfoAPI: AppConvertable {
+    typealias Target = WeatherInfo
+    
+    func convert() -> AnyPublisher<Target, Never> {
+        Just(
+            Target(temperature: temperature,
+                        feelsLike: feelsLike,
+                        minTemperature: minTemperature,
+                        maxTemperature: maxTemperature,
+                        pressure: pressure,
+                        humidity: humidity)
+        )
+        .eraseToAnyPublisher()
+    }
+}
