@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.dependencyInjector) private var dependencyInjector: DependencyInjector
-    @StateObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
             ScrollView {
-                Text(viewModel.weather.debugDescription)
+                Text("\(viewModel.forecast?.city.name ?? "")")
                     .padding()
                 Button("Tap") {
                     viewModel.showForecast()
@@ -26,8 +26,13 @@ struct ContentView: View {
     class ViewModel: ObservableObject {
         private let weatherService: WeatherService
         private let cancelBag: CancelBag
-    
-        @Published var weather: Weather?
+        
+        @Published var forecast: Forecast? {
+            didSet {
+                getDailyWeather()
+            }
+        }
+        @Published var dailyWeather: [(Double, Date)]?
         
         init(weatherService: WeatherService) {
             self.weatherService = weatherService
@@ -37,11 +42,22 @@ struct ContentView: View {
         func showForecast() {
             weatherService
                 .getDailyWeather()
-                .map { $0.weather.first }
+                .map { $0 }
                 .eraseToAnyPublisher()
                 .replaceError(with: nil)
-                .assign(to: \.weather, on: self)
+                .assign(to: \.forecast, on: self)
                 .store(in: cancelBag)
+        }
+        
+        func getDailyWeather() {
+            guard let temp = (forecast?.weather.map { array in
+                array.info.temperature
+            }), let dates = (forecast?.weather.map { array in
+                array.date
+            }) else {
+                return
+            }
+            dailyWeather = Array(zip(temp, dates))
         }
     }
 }
