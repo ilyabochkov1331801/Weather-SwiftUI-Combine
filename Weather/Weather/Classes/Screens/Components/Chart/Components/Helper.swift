@@ -8,29 +8,29 @@
 import Foundation
 import SwiftUI
 
-public struct GradientColor {
-    public let start: Color
-    public let end: Color
+struct GradientColor {
+    let start: Color
+    let end: Color
     
-    public init(start: Color, end: Color) {
+    init(start: Color, end: Color) {
         self.start = start
         self.end = end
     }
     
-    public func getGradient() -> Gradient {
+    func getGradient() -> Gradient {
         return Gradient(colors: [start, end])
     }
 }
 
-public class ChartStyle {
-    public var backgroundColor: Color
-    public var accentColor: Color
-    public var gradientColor: GradientColor
-    public var textColor: Color
-    public var legendTextColor: Color
-    public var dropShadowColor: Color
+class ChartStyle {
+    var backgroundColor: Color
+    var accentColor: Color
+    var gradientColor: GradientColor
+    var textColor: Color
+    var legendTextColor: Color
+    var dropShadowColor: Color
     
-    public init(backgroundColor: Color, accentColor: Color, gradientColor: GradientColor, textColor: Color, legendTextColor: Color, dropShadowColor: Color){
+    init(backgroundColor: Color, accentColor: Color, gradientColor: GradientColor, textColor: Color, legendTextColor: Color, dropShadowColor: Color) {
         self.backgroundColor = backgroundColor
         self.accentColor = accentColor
         self.gradientColor = gradientColor
@@ -40,21 +40,21 @@ public class ChartStyle {
     }
 }
 
-public class ChartData: ObservableObject, Identifiable {
-    @Published var points: [(String, Double)]
+class ChartData: ObservableObject, Identifiable {
+    @Published var points: Binding<[(String, Double)]>
     var valuesGiven: Bool = false
     var ID = UUID()
     
-    public init<N: BinaryFloatingPoint>(values:[(String,N)]){
-        self.points = values.map{($0.0, Double($0.1))}
+    init(values: Binding<[(String,Double)]> ){
+        self.points = values
         self.valuesGiven = true
     }
     
-    public func onlyPoints() -> [Double] {
-        return self.points.map{ $0.1 }
+    func onlyPoints() -> [Double] {
+        return self.points.wrappedValue.map{ $0.1 }
     }
     
-    public func onlyStrings() -> [String] {
-        return self.points.map{ $0.0 }
+    func onlyStrings() -> [String] {
+        return self.points.wrappedValue.map{ $0.0 }
     }
 }

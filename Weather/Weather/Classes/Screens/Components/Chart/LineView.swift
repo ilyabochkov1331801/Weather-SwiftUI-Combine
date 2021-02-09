@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-public struct LineView: View {
+struct LineView: View {
     @ObservedObject var data: ChartData
-    public var title: String?
-    public var legend: String?
-    public var style: ChartStyle
+    var title: String?
+    var legend: String?
+    var style: ChartStyle
     
     @State private var showLegend = false
-    @State private var dragLocation:CGPoint = .zero
+    @State private var dragLocation: CGPoint = .zero
     @State private var indicatorLocation: CGPoint = .zero
     @State private var closestPoint: CGPoint = .zero
     @State private var opacity: Double = 0
@@ -22,7 +22,7 @@ public struct LineView: View {
     @State private var currentDataString: String = ""
     @State private var hideHorizontalLines: Bool = false
     
-    public init(data: [(String, Double)],
+    init(data: Binding<[(String, Double)]>,
                 title: String? = nil,
                 legend: String? = nil,
                 style: ChartStyle) {
@@ -33,7 +33,7 @@ public struct LineView: View {
         self.style = style
     }
     
-    public var body: some View {
+    var body: some View {
         GeometryReader{ geometry in
             VStack(alignment: .leading, spacing: 8) {
                 Group{

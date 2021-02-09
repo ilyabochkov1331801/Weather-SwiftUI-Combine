@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3325F69325C2A1A300BB1997 /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3325F69225C2A1A300BB1997 /* BottomButton.swift */; };
+		3377B44925D2DE560054E888 /* Binding + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3377B44825D2DE560054E888 /* Binding + Extension.swift */; };
 		338C437925D1469B000B1C94 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C436C25D1469B000B1C94 /* Roboto-Medium.ttf */; };
 		338C437A25D1469B000B1C94 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C436D25D1469B000B1C94 /* Roboto-Light.ttf */; };
 		338C437B25D1469B000B1C94 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C436E25D1469B000B1C94 /* Roboto-Regular.ttf */; };
@@ -90,6 +91,7 @@
 		1FD69726583F6321EC21F415 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E945200854FE87FF693844 /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 		3325F69225C2A1A300BB1997 /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
+		3377B44825D2DE560054E888 /* Binding + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding + Extension.swift"; sourceTree = "<group>"; };
 		338C436C25D1469B000B1C94 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		338C436D25D1469B000B1C94 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		338C436E25D1469B000B1C94 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			children = (
 				33964B1625BF006C0098E500 /* View + Extension.swift */,
 				33DCAD6D25C04B5D005DC918 /* Path + Extension.swift */,
+				3377B44825D2DE560054E888 /* Binding + Extension.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -582,10 +585,10 @@
 		EAD5D8DA257A668700A7773C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				33AAFDA72578EBE1006FD448 /* ContentView.swift */,
 				338C43A525D14E9F000B1C94 /* ContentViewRouter.swift */,
 				338C43A625D14E9F000B1C94 /* TestView.swift */,
 				33964B0925BEFDFE0098E500 /* Components */,
-				33AAFDA72578EBE1006FD448 /* ContentView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				33B0357D2594F0CA00398E4D /* PermissionService.swift in Sources */,
 				33B035852594F26C00398E4D /* Permission.swift in Sources */,
 				EAD5D8DC257A669D00A7773C /* AppEnvironment.swift in Sources */,
+				3377B44925D2DE560054E888 /* Binding + Extension.swift in Sources */,
 				EAD5D8CE257A647A00A7773C /* Store.swift in Sources */,
 				33AAFE77257A844E006FD448 /* APIProvider.swift in Sources */,
 				33964B1325BEFFA90098E500 /* CGFloat + Extension.swift in Sources */,

@@ -21,10 +21,10 @@ public struct Line: View {
     let padding:CGFloat = 30
     var curvedLines: Bool = true
     var stepWidth: CGFloat {
-        if data.points.count < 2 {
+        if data.points.wrappedValue.count < 2 {
             return 0
         }
-        return frame.size.width / CGFloat(data.points.count - 1)
+        return frame.size.width / CGFloat(data.points.wrappedValue.count - 1)
     }
     var stepHeight: CGFloat {
         var min: Double?
