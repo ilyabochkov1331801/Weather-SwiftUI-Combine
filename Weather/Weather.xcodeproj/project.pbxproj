@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331F9ABF25D430F900B2A838 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331F9ABE25D430F900B2A838 /* Date + Extension.swift */; };
 		3325F69325C2A1A300BB1997 /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3325F69225C2A1A300BB1997 /* BottomButton.swift */; };
 		3377B44925D2DE560054E888 /* Binding + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3377B44825D2DE560054E888 /* Binding + Extension.swift */; };
 		338C437925D1469B000B1C94 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C436C25D1469B000B1C94 /* Roboto-Medium.ttf */; };
@@ -26,7 +27,6 @@
 		338C43A225D14E65000B1C94 /* NavigationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C439F25D14E65000B1C94 /* NavigationModifier.swift */; };
 		338C43A325D14E65000B1C94 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C43A025D14E65000B1C94 /* Router.swift */; };
 		338C43A725D14E9F000B1C94 /* ContentViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C43A525D14E9F000B1C94 /* ContentViewRouter.swift */; };
-		338C43A825D14E9F000B1C94 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C43A625D14E9F000B1C94 /* TestView.swift */; };
 		33964AE425BEE46C0098E500 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33964AE325BEE46B0098E500 /* DateService.swift */; };
 		33964AE725BEE47F0098E500 /* DateServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33964AE625BEE47F0098E500 /* DateServiceProtocol.swift */; };
 		33964AEA25BEEC9A0098E500 /* Optional + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33964AE925BEEC9A0098E500 /* Optional + Extension.swift */; };
@@ -60,6 +60,8 @@
 		33DCAD6B25C04B2C005DC918 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DCAD6A25C04B2C005DC918 /* IndicatorPoint.swift */; };
 		33DCAD6E25C04B5D005DC918 /* Path + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DCAD6D25C04B5D005DC918 /* Path + Extension.swift */; };
 		33DCADBC25C1531F005DC918 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DCADBB25C1531F005DC918 /* WeatherInfo.swift */; };
+		33E27A5125D3DCE5000A9E89 /* NextDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E27A5025D3DCE5000A9E89 /* NextDaysView.swift */; };
+		33E27A5725D3E32A000A9E89 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E27A5625D3E32A000A9E89 /* CellView.swift */; };
 		B69BFCB0DCFC38F36E7DA353 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FD69726583F6321EC21F415 /* Pods_Weather.framework */; };
 		EA8877C3257A7FB100CA0431 /* AppConvertableTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8877C2257A7FB100CA0431 /* AppConvertableTarget.swift */; };
 		EA8877C6257A7FCD00CA0431 /* AppConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8877C5257A7FCD00CA0431 /* AppConvertable.swift */; };
@@ -90,6 +92,7 @@
 /* Begin PBXFileReference section */
 		1FD69726583F6321EC21F415 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E945200854FE87FF693844 /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
+		331F9ABE25D430F900B2A838 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		3325F69225C2A1A300BB1997 /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		3377B44825D2DE560054E888 /* Binding + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding + Extension.swift"; sourceTree = "<group>"; };
 		338C436C25D1469B000B1C94 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -109,7 +112,6 @@
 		338C439F25D14E65000B1C94 /* NavigationModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationModifier.swift; sourceTree = "<group>"; };
 		338C43A025D14E65000B1C94 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		338C43A525D14E9F000B1C94 /* ContentViewRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewRouter.swift; sourceTree = "<group>"; };
-		338C43A625D14E9F000B1C94 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		33964AE325BEE46B0098E500 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		33964AE625BEE47F0098E500 /* DateServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateServiceProtocol.swift; sourceTree = "<group>"; };
 		33964AE925BEEC9A0098E500 /* Optional + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional + Extension.swift"; sourceTree = "<group>"; };
@@ -159,6 +161,8 @@
 		33DCAD6A25C04B2C005DC918 /* IndicatorPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
 		33DCAD6D25C04B5D005DC918 /* Path + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path + Extension.swift"; sourceTree = "<group>"; };
 		33DCADBB25C1531F005DC918 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
+		33E27A5025D3DCE5000A9E89 /* NextDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextDaysView.swift; sourceTree = "<group>"; };
+		33E27A5625D3E32A000A9E89 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		3DC9A732CA08884D6D2347E0 /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
 		EA8877C2257A7FB100CA0431 /* AppConvertableTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConvertableTarget.swift; sourceTree = "<group>"; };
 		EA8877C5257A7FCD00CA0431 /* AppConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConvertable.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				33B03593259549A100398E4D /* URLRequest + Extension.swift */,
+				331F9ABE25D430F900B2A838 /* Date + Extension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -466,6 +471,23 @@
 				33DCAD6425C04AE7005DC918 /* Legend.swift */,
 				33DCAD6125C04AB5005DC918 /* MagnifierRect.swift */,
 				33DCAD5E25C04A4D005DC918 /* Helper.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		33E27A4F25D3DCCE000A9E89 /* NextDays */ = {
+			isa = PBXGroup;
+			children = (
+				33E27A5525D3E311000A9E89 /* Components */,
+				33E27A5025D3DCE5000A9E89 /* NextDaysView.swift */,
+			);
+			path = NextDays;
+			sourceTree = "<group>";
+		};
+		33E27A5525D3E311000A9E89 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				33E27A5625D3E32A000A9E89 /* CellView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -585,9 +607,9 @@
 		EAD5D8DA257A668700A7773C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				33E27A4F25D3DCCE000A9E89 /* NextDays */,
 				33AAFDA72578EBE1006FD448 /* ContentView.swift */,
 				338C43A525D14E9F000B1C94 /* ContentViewRouter.swift */,
-				338C43A625D14E9F000B1C94 /* TestView.swift */,
 				33964B0925BEFDFE0098E500 /* Components */,
 			);
 			path = Screens;
@@ -766,12 +788,14 @@
 				338C43A325D14E65000B1C94 /* Router.swift in Sources */,
 				EA8877D8257A84DD00CA0431 /* Weather.swift in Sources */,
 				338C43A725D14E9F000B1C94 /* ContentViewRouter.swift in Sources */,
+				331F9ABF25D430F900B2A838 /* Date + Extension.swift in Sources */,
 				338C43A125D14E65000B1C94 /* SheetModifier.swift in Sources */,
 				EA8877EA257A8D4200CA0431 /* CloudsAPI.swift in Sources */,
+				33E27A5725D3E32A000A9E89 /* CellView.swift in Sources */,
 				33964AE725BEE47F0098E500 /* DateServiceProtocol.swift in Sources */,
 				33964AE425BEE46C0098E500 /* DateService.swift in Sources */,
 				33DCAD6E25C04B5D005DC918 /* Path + Extension.swift in Sources */,
-				338C43A825D14E9F000B1C94 /* TestView.swift in Sources */,
+				33E27A5125D3DCE5000A9E89 /* NextDaysView.swift in Sources */,
 				33964B1725BF006C0098E500 /* View + Extension.swift in Sources */,
 				EA8877C3257A7FB100CA0431 /* AppConvertableTarget.swift in Sources */,
 				EA8877F8257A91A000CA0431 /* ForecastAPI.swift in Sources */,

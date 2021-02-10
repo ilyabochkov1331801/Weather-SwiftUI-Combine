@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol ContentRouterProtocol: Router {
-    func presentTest()
+    func presentNext(weather: Binding<[Weather]>)
 }
 
 struct ContentView<N: ContentRouterProtocol>: View {
@@ -20,6 +20,7 @@ struct ContentView<N: ContentRouterProtocol>: View {
         _router = StateObject(wrappedValue: router)
         _viewModel = StateObject(wrappedValue: viewModel)
         setupUI()
+        viewModel.showForecast()
     }
     @State var trim: CGFloat = 0
     
@@ -36,22 +37,31 @@ struct ContentView<N: ContentRouterProtocol>: View {
             ZStack(alignment: .top) {
                 Color(Asset.charade.name)
                     .edgesIgnoringSafeArea(.all)
-                VStack(alignment: .center, spacing: 20) {
-                    CardPreview(city: $viewModel.city, currentWeather: $viewModel.currentWeather)
-                        .onAppear {
-                            viewModel.showForecast()
+                ScrollView {
+                    VStack(alignment: .center, spacing: 20) {
+                        CardPreview(city: $viewModel.city, currentWeather: $viewModel.currentWeather)
+                            .onAppear {
+                                viewModel.showForecast()
+                            }
+                            .padding(.horizontal)
+                        LineView(data: $viewModel.dailyWeather.unwrap() ?? .constant([]) , title: "Today", legend: "Weather each 3 hours",
+                                 style: ChartStyle(backgroundColor: .clear,
+                                                   accentColor: Color(Asset.manatee.name),
+                                                   gradientColor: GradientColor(start: Color(Asset.malibu.name),
+                                                                                end: Color(Asset.electricViolet.name)),
+                                                   textColor: .white,
+                                                   legendTextColor: Color(Asset.manatee.name),
+                                                   dropShadowColor: .clear))
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 200, alignment: .center)
+                        BottomButton {
+                            router.presentNext(weather: $viewModel.daily.unwrap() ?? .constant([]))
                         }
-                        .padding()
-//                    LineView(data: $viewModel.dailyWeather.unwrap() ?? .constant([]) , title: "Today", legend: "Weather each 3 hours",
-//                             style: ChartStyle(backgroundColor: .clear, accentColor: Color(Asset.manatee.name), gradientColor: GradientColor(start: Color(Asset.malibu.name), end: Color(Asset.electricViolet.name)), textColor: .white, legendTextColor: Color(Asset.manatee.name), dropShadowColor: .clear))
-//                        .frame(width: UIScreen.main.bounds.width - 50, height: 200, alignment: .center)
+                        .offset(y: UIScreen.main.bounds.height / 5)
+                        .sheet(router)
+                    }
+                    .offset(y: 100)
                 }
-                .offset(y: 100)
                 
-                BottomButton {
-                    
-                }
-                .offset(y: UIScreen.main.bounds.height - 100)
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("Today \(viewModel.getCurrentDate())", displayMode: .inline)
@@ -75,9 +85,11 @@ struct ContentView<N: ContentRouterProtocol>: View {
             didSet {
                 getDailyWeather()
                 getCurrentWeather()
+                getArray()
             }
         }
         @Published var city: City?
+        @Published var daily: [Weather]?
         @Published var currentWeather: Weather?
         @Published var dailyWeather: [(String, Double)]?
         
@@ -93,6 +105,10 @@ struct ContentView<N: ContentRouterProtocol>: View {
         
         func getCurrentWeather() {
             currentWeather = forecast?.weather.first
+        }
+        
+        func getArray() {
+            daily = forecast?.weather
         }
         
         func getCity() {
@@ -117,7 +133,11 @@ struct ContentView<N: ContentRouterProtocol>: View {
             }) else {
                 return
             }
-            dailyWeather = Array(zip(dates, temp))
+            if dates.count > 0 {
+                dailyWeather = Array(zip(dates[0..<9], temp))
+            } else {
+                dailyWeather = Array(zip(dates, temp))
+            }
         }
     }
 }

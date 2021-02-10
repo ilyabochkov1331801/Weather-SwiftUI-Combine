@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WeatherInfo {
+struct WeatherInfo: Hashable {
     let temperature: Double
     let feelsLike: Double
     let minTemperature: Double
