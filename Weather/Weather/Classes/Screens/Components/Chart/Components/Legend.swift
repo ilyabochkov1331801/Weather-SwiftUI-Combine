@@ -40,7 +40,7 @@ struct Legend: View {
         ZStack(alignment: .topLeading) {
             ForEach((0...9), id: \.self) { height in
                 HStack(alignment: .center) {
-                    Text("\(self.getYLegendSafe(height: height), specifier: "%.0f")").offset(x: 0, y: self.getYposition(height: height) )
+                    Text("\(self.getYLegendSafe(height: height), specifier: "%.2f")").offset(x: 0, y: self.getYposition(height: height) )
                         .foregroundColor(Color(Asset.mischka.name))
                         .font(.caption)
                     self.line(atHeight: self.getYLegendSafe(height: height), width: self.frame.width)

@@ -20,6 +20,7 @@ struct ContentView<N: ContentRouterProtocol>: View {
         _router = StateObject(wrappedValue: router)
         _viewModel = StateObject(wrappedValue: viewModel)
         setupUI()
+        viewModel.showForecast()
     }
     @State var trim: CGFloat = 0
     
@@ -37,21 +38,20 @@ struct ContentView<N: ContentRouterProtocol>: View {
                 Color(Asset.charade.name)
                     .edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center, spacing: 20) {
-                    CardPreview(city: $viewModel.city, currentWeather: $viewModel.currentWeather)
-                        .onAppear {
-                            viewModel.showForecast()
-                        }
-                        .padding()
-//                    LineView(data: $viewModel.dailyWeather.unwrap() ?? .constant([]) , title: "Today", legend: "Weather each 3 hours",
-//                             style: ChartStyle(backgroundColor: .clear, accentColor: Color(Asset.manatee.name), gradientColor: GradientColor(start: Color(Asset.malibu.name), end: Color(Asset.electricViolet.name)), textColor: .white, legendTextColor: Color(Asset.manatee.name), dropShadowColor: .clear))
-//                        .frame(width: UIScreen.main.bounds.width - 50, height: 200, alignment: .center)
+//                    CardPreview(city: $viewModel.forecast.binding(keyPath: \.city),
+//                                currentWeather: $viewModel.forecast.binding(keyPath: \.weather))
+//                        .padding()
+                    LineView(data: $viewModel.dailyWeather, title: "Today", legend: "Weather each 3 hours",
+                             style: ChartStyle(backgroundColor: .clear, accentColor: Color(Asset.manatee.name), gradientColor: GradientColor(start: Color(Asset.malibu.name), end: Color(Asset.electricViolet.name)), textColor: .white, legendTextColor: Color(Asset.manatee.name), dropShadowColor: .clear))
+                        .frame(width: UIScreen.main.bounds.width - 50, height: 200, alignment: .center)
                 }
                 .offset(y: 100)
                 
                 BottomButton {
-                    
+                    viewModel.showForecast()
                 }
                 .offset(y: UIScreen.main.bounds.height - 100)
+                .sheet(router)
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("Today \(viewModel.getCurrentDate())", displayMode: .inline)
@@ -71,15 +71,8 @@ struct ContentView<N: ContentRouterProtocol>: View {
         private let dateService: DateService
         private let cancelBag: CancelBag
         
-        @Published var forecast: Forecast? {
-            didSet {
-                getDailyWeather()
-                getCurrentWeather()
-            }
-        }
-        @Published var city: City?
-        @Published var currentWeather: Weather?
-        @Published var dailyWeather: [(String, Double)]?
+        @Published var forecast: Forecast = .empty
+        @Published var dailyWeather: [(String, Double)] = []
         
         init(weatherService: WeatherService, dateService: DateService) {
             self.weatherService = weatherService
@@ -91,35 +84,36 @@ struct ContentView<N: ContentRouterProtocol>: View {
             dateService.getCurrentDate()
         }
         
-        func getCurrentWeather() {
-            currentWeather = forecast?.weather.first
-        }
-        
-        func getCity() {
-            city = forecast?.city
-        }
-        
         func showForecast() {
             weatherService
                 .getDailyWeather()
                 .map { $0 }
                 .eraseToAnyPublisher()
-                .replaceError(with: nil)
-                .assign(to: \.forecast, on: self)
+                .sink(receiveCompletion: {
+                    print($0)
+                }, receiveValue: {
+                    self.forecast = $0
+                })
                 .store(in: cancelBag)
-        }
-        
-        func getDailyWeather() {
-            guard let temp = (forecast?.weather.map { array in
-                array.info.temperature
-            }), let dates = (forecast?.weather.map { array in
-                String(Calendar.current.component(.hour, from: array.date))
-            }) else {
-                return
-            }
-            dailyWeather = Array(zip(dates, temp))
+            
+            $forecast
+                .eraseToAnyPublisher()
+                .map {
+                    let dates = ($0.weather.map { array in
+                        DateComponentsFormatter().string(from: Calendar.current.dateComponents([.hour, .minute], from: array.date)).unwrapped
+                    })
+                    
+                    let temp = ($0.weather.map { array in
+                        array.info.temperature
+                    })
+                    
+                    if dates.count > 0 && temp.count > 0 {
+                        return Array(zip(dates[0..<9], temp))
+                    }
+                    return Array(zip(dates, temp))
+                }
+                .assign(to: \.dailyWeather, on: self)
+                .store(in: cancelBag)
         }
     }
 }
-
-//("00:00", -8.0),("03:00", 23.0),("06:00", 54.0),("09:00", 32.0),("12:00", 12.0),("15:00", 37.0),("18:00", -7.0),("21:00", 37.0),("24:00", 17.0)

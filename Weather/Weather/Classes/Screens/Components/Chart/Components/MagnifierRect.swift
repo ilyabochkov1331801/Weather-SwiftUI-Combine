@@ -13,7 +13,7 @@ public struct MagnifierRect: View {
     
     public var body: some View {
         ZStack{
-            Text("\(self.currentNumber, specifier: "%.0f")")
+            Text("\(self.currentNumber, specifier: "%.2f")")
                 .font(.system(size: 18, weight: .bold))
                 .offset(x: 0, y: -110.widthDependent())
                 .foregroundColor(Color.white)
