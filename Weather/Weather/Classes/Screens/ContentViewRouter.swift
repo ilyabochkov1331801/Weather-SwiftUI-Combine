@@ -10,8 +10,15 @@ import SwiftUI
 class ContentViewRouter: Router, ContentRouterProtocol {
     func presentTest() {
         let router = Router(isPresented: isNavigating)
-        navigateTo(
+        navigateTo (
             TestView(router: router)
+        )
+    }
+    
+    func presentSettings() {
+        let router = Router(isPresented: isNavigating)
+        presentSheet (
+            SettingsView()
         )
     }
 }
