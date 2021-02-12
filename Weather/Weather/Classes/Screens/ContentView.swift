@@ -8,6 +8,8 @@
 import SwiftUI
 
 protocol ContentRouterProtocol: Router {
+    func presentTest()
+    func presentSettings()
     func presentNext(weather: Binding<[Weather]>)
 }
 
@@ -26,10 +28,11 @@ struct ContentView<N: ContentRouterProtocol>: View {
     
     var menuButton: some View {
         Button(action: {
+            router.presentSettings()
         }) {
             Image(Asset.menu.name)
                 .resizable()
-        }
+        }.sheet(router)
     }
     
     var body: some View {
@@ -73,7 +76,7 @@ struct ContentView<N: ContentRouterProtocol>: View {
         UINavigationBar.appearance().barTintColor = .clear
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: Asset.midGray.color, .font: UIFont(font: FontFamily.Roboto.regular, size: 20.0).unwrapped]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(font: FontFamily.Roboto.regular, size: 20.0).unwrapped]
     }
     
     class ViewModel: ObservableObject {

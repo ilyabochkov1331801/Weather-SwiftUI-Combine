@@ -13,4 +13,11 @@ class ContentViewRouter: Router, ContentRouterProtocol {
             NextDaysView(weather: weather)
         )
     }
+    
+    func presentSettings() {
+        let router = Router(isPresented: isNavigating)
+        presentSheet (
+            SettingsView()
+        )
+    }
 }

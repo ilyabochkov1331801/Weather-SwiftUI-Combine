@@ -31,6 +31,7 @@ internal enum Asset {
   internal static let midGray = ColorAsset(name: "Mid Gray")
   internal static let mischka = ColorAsset(name: "Mischka")
   internal static let mountainMist = ColorAsset(name: "Mountain Mist")
+  internal static let shark = ColorAsset(name: "Shark")
   internal static let trout = ColorAsset(name: "Trout")
   internal static let cancel = ImageAsset(name: "cancel")
   internal static let menu = ImageAsset(name: "menu")
