@@ -12,8 +12,8 @@ public struct MagnifierRect: View {
     @Binding var currentString: String
     
     public var body: some View {
-        ZStack {
-            Text("\(self.currentNumber, specifier: "%.0f")")
+        ZStack{
+            Text("\(self.currentNumber, specifier: "%.2f")")
                 .font(.system(size: 18, weight: .bold))
                 .offset(x: 0, y: -90.heightDependent())
                 .foregroundColor(.white)

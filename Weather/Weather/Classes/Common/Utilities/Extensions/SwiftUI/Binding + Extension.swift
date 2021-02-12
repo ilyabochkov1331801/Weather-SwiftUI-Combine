@@ -21,3 +21,13 @@ extension Binding {
         )
     }
 }
+
+extension Binding {
+    func binding<T>(keyPath: KeyPath<Value, T>) -> Binding<T> {
+        Binding<T> {
+            wrappedValue[keyPath: keyPath]
+        } set: {
+            wrappedValue[keyPath: (keyPath as? WritableKeyPath)!] = $0
+        }
+    }
+}

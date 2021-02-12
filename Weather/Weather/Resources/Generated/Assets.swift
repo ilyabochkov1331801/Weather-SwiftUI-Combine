@@ -35,6 +35,7 @@ internal enum Asset {
   internal static let trout = ColorAsset(name: "Trout")
   internal static let cancel = ImageAsset(name: "cancel")
   internal static let menu = ImageAsset(name: "menu")
+  internal static let next = ImageAsset(name: "next")
   internal static let clearD = ImageAsset(name: "clearD")
   internal static let clearN = ImageAsset(name: "clearN")
   internal static let cloudy = ImageAsset(name: "cloudy")
