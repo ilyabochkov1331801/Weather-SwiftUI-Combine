@@ -8,8 +8,8 @@
 import SwiftUI
 
 protocol ContentRouterProtocol: Router {
-    func presentTest()
     func presentSettings()
+    func presentNext(weather: Binding<[Weather]>)
 }
 
 struct ContentView<N: ContentRouterProtocol>: View {
@@ -39,21 +39,31 @@ struct ContentView<N: ContentRouterProtocol>: View {
             ZStack(alignment: .top) {
                 Color(Asset.charade.name)
                     .edgesIgnoringSafeArea(.all)
-                VStack(alignment: .center, spacing: 20) {
-//                    CardPreview(city: $viewModel.forecast.binding(keyPath: \.city),
-//                                currentWeather: $viewModel.forecast.binding(keyPath: \.weather))
-//                        .padding()
-                    LineView(data: $viewModel.dailyWeather, title: "Today", legend: "Weather each 3 hours",
-                             style: ChartStyle(backgroundColor: .clear, accentColor: Color(Asset.manatee.name), gradientColor: GradientColor(start: Color(Asset.malibu.name), end: Color(Asset.electricViolet.name)), textColor: .white, legendTextColor: Color(Asset.manatee.name), dropShadowColor: .clear))
-                        .frame(width: UIScreen.main.bounds.width - 50, height: 200, alignment: .center)
+                ScrollView {
+                    VStack(alignment: .center, spacing: 20) {
+                        CardPreview(city: $viewModel.city, currentWeather: $viewModel.currentWeather)
+                            .onAppear {
+                                viewModel.showForecast()
+                            }
+                            .padding(.horizontal)
+                        LineView(data: $viewModel.dailyWeather.unwrap() ?? .constant([]) , title: "Today", legend: "Weather each 3 hours",
+                                 style: ChartStyle(backgroundColor: .clear,
+                                                   accentColor: Color(Asset.manatee.name),
+                                                   gradientColor: GradientColor(start: Color(Asset.malibu.name),
+                                                                                end: Color(Asset.electricViolet.name)),
+                                                   textColor: .white,
+                                                   legendTextColor: Color(Asset.manatee.name),
+                                                   dropShadowColor: .clear))
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 200, alignment: .center)
+                        BottomButton {
+                            router.presentNext(weather: $viewModel.daily.unwrap() ?? .constant([]))
+                        }
+                        .offset(y: UIScreen.main.bounds.height / 5)
+                        .sheet(router)
+                    }
+                    .offset(y: 100)
                 }
-                .offset(y: 100)
                 
-                BottomButton {
-                    viewModel.showForecast()
-                }
-                .offset(y: UIScreen.main.bounds.height - 100)
-                .sheet(router)
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("Today \(viewModel.getCurrentDate())", displayMode: .inline)
@@ -75,6 +85,9 @@ struct ContentView<N: ContentRouterProtocol>: View {
         
         @Published var forecast: Forecast = .empty
         @Published var dailyWeather: [(String, Double)] = []
+        @Published var city: City?
+        @Published var daily: [Weather]?
+        @Published var currentWeather: Weather?
         
         init(weatherService: WeatherService, dateService: DateService) {
             self.weatherService = weatherService
