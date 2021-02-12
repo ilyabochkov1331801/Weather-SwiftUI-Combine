@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var currencyCode: String = ""
+    @State private var currencyCode = "Celsius(°C)"
     var codes: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
     
     var closeButton: some View {

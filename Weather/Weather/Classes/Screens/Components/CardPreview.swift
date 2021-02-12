@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CardPreview: View {
-    @Binding var city: City?
+    @Binding var city: City
     @Binding var currentWeather: Weather?
     
     var body: some View {
@@ -27,7 +27,7 @@ struct CardPreview: View {
                                 .lineLimit(.zero)
                                 .customFont(name: FontFamily.Roboto.regular.name, size: 18)
                                 .foregroundColor(.white)
-                            Text(city?.name ?? "")
+                            Text(city.name)
                                 .customFont(name: FontFamily.Roboto.regular.name, size: 10)
                                 .foregroundColor(Color(Asset.midGray.name))
                         }

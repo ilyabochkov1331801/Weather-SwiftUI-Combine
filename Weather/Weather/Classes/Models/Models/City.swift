@@ -11,6 +11,8 @@ struct City {
     let name: String
     let sunrise: Date
     let sunset: Date
+    
+    static let empty = City(name: "No name", sunrise: Date(), sunset: Date())
 }
 
 extension City: AppConvertableTarget { }
