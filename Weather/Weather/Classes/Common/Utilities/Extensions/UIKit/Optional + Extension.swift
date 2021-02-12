@@ -15,3 +15,12 @@ extension Optional where Wrapped == UIFont {
         return unwrapped
     }
 }
+
+extension Optional where Wrapped == String {
+    var unwrapped: String {
+        guard let unwrapped = self else {
+            return ""
+        }
+        return unwrapped
+    }
+}

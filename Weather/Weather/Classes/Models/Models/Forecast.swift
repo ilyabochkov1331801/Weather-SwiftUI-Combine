@@ -10,6 +10,8 @@ import Foundation
 struct Forecast {
     let city: City
     let weather: [Weather]
+    
+    static let empty: Forecast = Forecast(city: City(name: "No name", sunrise: Date(), sunset: Date()), weather: [])
 }
 
 extension Forecast: AppConvertableTarget { }
