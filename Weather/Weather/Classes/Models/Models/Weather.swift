@@ -9,11 +9,15 @@ import Foundation
 
 typealias Deegrees = Double
 
-struct Weather {
+struct Weather: Hashable {
     let state: String
     let date: Date
     let info: WeatherInfo
     let wind: Double
+    
+    static func == (lhs: Weather, rhs: Weather) -> Bool {
+        lhs.hashValue == rhs.hashValue
+    }
 }
 
 extension Weather: AppConvertableTarget { }

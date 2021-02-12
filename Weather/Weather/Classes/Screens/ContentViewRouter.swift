@@ -8,10 +8,9 @@
 import SwiftUI
 
 class ContentViewRouter: Router, ContentRouterProtocol {
-    func presentTest() {
-        let router = Router(isPresented: isNavigating)
-        navigateTo (
-            TestView(router: router)
+    func presentNext(weather: Binding<[Weather]>) {
+        presentSheet(
+            NextDaysView(weather: weather)
         )
     }
     
