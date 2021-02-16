@@ -19,4 +19,10 @@ extension Date {
         formatter.dateFormat = "MMMM, dd"
         return formatter.string(from: self)
     }
+    
+    func time() -> String? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self)
+    }
 }

@@ -15,16 +15,18 @@ public struct MagnifierRect: View {
         ZStack{
             Text("\(self.currentNumber, specifier: "%.2f")")
                 .font(.system(size: 18, weight: .bold))
-                .offset(x: 0, y: -90.heightDependent())
+                .offset(x: 0, y: -110.heightDependent())
                 .foregroundColor(.white)
             RoundedRectangle(cornerRadius: 16)
-                .frame(width: 60, height: 250.heightDependent())
-                .foregroundColor(.white)
+                .stroke(Color.black)
+                .frame(width: 60, height: 270.heightDependent())
                 .shadow(color: Color(Asset.trout.name), radius: 12, x: 0, y: 6 )
+                .foregroundColor(.clear)
+                .blur(radius: 3.0)
                 .blendMode(.multiply)
             Text("\(self.currentString)")
                 .font(.system(size: 18, weight: .bold))
-                .offset(x: 0, y: 90.heightDependent())
+                .offset(x: 0, y: 110.heightDependent())
                 .foregroundColor(.white)
         }
     }

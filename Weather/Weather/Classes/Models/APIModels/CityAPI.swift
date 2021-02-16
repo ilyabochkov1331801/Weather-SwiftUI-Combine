@@ -11,7 +11,7 @@ import Foundation
 struct CityAPI: Codable {
     let id: Int
     let coordinates: CoordinatesAPI
-    let country: String
+    let name: String
     let timezone: Int
     let sunrise: Int
     let sunset: Int
@@ -19,7 +19,7 @@ struct CityAPI: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case coordinates = "coord"
-        case country
+        case name
         case timezone
         case sunrise
         case sunset
@@ -31,7 +31,7 @@ extension CityAPI: AppConvertable {
     
     func convert() -> AnyPublisher<Target, Never> {
         Just(
-            Target(name: country,
+            Target(name: name,
                    sunrise: Date(timeIntervalSince1970: Double(sunrise)),
                    sunset: Date(timeIntervalSince1970: Double(sunset)))
         )

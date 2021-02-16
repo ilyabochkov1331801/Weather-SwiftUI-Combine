@@ -10,4 +10,5 @@ import Combine
 
 protocol WeatherServiceProtocol {
     func getDailyWeather() -> AnyPublisher<WeatherEndpoint.EndpointData.Target, Error>
+    func getDailyWeather(by city: String) -> AnyPublisher<WeatherEndpoint.EndpointData.Target, Error>
 }

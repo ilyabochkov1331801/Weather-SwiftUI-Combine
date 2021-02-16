@@ -29,7 +29,7 @@ extension AppState {
 
 extension AppState {
     struct System: Equatable {
-        
+        static var units: AppEnvironment.WeatherUnits = .degrees
     }
 }
 

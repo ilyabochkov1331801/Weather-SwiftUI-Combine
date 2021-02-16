@@ -38,13 +38,16 @@ internal enum Asset {
   internal static let next = ImageAsset(name: "next")
   internal static let clearD = ImageAsset(name: "clearD")
   internal static let clearN = ImageAsset(name: "clearN")
-  internal static let cloudy = ImageAsset(name: "cloudy")
-  internal static let cloudyD = ImageAsset(name: "cloudyD")
-  internal static let cloudyN = ImageAsset(name: "cloudyN")
-  internal static let drizzle = ImageAsset(name: "drizzle")
-  internal static let rain = ImageAsset(name: "rain")
-  internal static let snow = ImageAsset(name: "snow")
-  internal static let thunderstorm = ImageAsset(name: "thunderstorm")
+  internal static let cloudsD = ImageAsset(name: "cloudsD")
+  internal static let cloudsN = ImageAsset(name: "cloudsN")
+  internal static let drizzleD = ImageAsset(name: "drizzleD")
+  internal static let drizzleN = ImageAsset(name: "drizzleN")
+  internal static let rainD = ImageAsset(name: "rainD")
+  internal static let rainN = ImageAsset(name: "rainN")
+  internal static let snowD = ImageAsset(name: "snowD")
+  internal static let snowN = ImageAsset(name: "snowN")
+  internal static let thunderstormD = ImageAsset(name: "thunderstormD")
+  internal static let thunderstormN = ImageAsset(name: "thunderstormN")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

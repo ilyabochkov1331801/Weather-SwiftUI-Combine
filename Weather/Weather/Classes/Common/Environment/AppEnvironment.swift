@@ -9,6 +9,11 @@ import Combine
 
 struct AppEnvironment {
     let container: DependencyInjector
+    
+    enum WeatherUnits: String, CaseIterable {
+        case degrees = "Celsius(°C)"
+        case fahrenheit = "Fahrenheit(°F)"
+    }
 }
 
 extension AppEnvironment {

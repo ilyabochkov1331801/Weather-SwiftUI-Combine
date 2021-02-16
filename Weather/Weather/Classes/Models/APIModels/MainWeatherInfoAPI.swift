@@ -38,11 +38,11 @@ extension MainWeatherInfoAPI: AppConvertable {
     func convert() -> AnyPublisher<Target, Never> {
         Just(
             Target(temperature: temperature,
-                        feelsLike: feelsLike,
-                        minTemperature: minTemperature,
-                        maxTemperature: maxTemperature,
-                        pressure: pressure,
-                        humidity: humidity)
+                   feelsLike: feelsLike,
+                   minTemperature: minTemperature,
+                   maxTemperature: maxTemperature,
+                   pressure: pressure,
+                   humidity: humidity)
         )
         .eraseToAnyPublisher()
     }

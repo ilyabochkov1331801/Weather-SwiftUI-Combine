@@ -31,6 +31,11 @@ class WeatherService: WeatherServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
+    
+    func getDailyWeather(by city: String) -> AnyPublisher<WeatherEndpoint.EndpointData.Target, Error> {
+        apiProvider.execute(endpoint: WeatherEndpoint.getForecastWeatherByCity(city: city))
+            .eraseToAnyPublisher()
+    }
 }
 
 extension WeatherService {

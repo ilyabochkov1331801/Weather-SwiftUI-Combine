@@ -62,6 +62,7 @@ private extension LocationProvider {
         askForPermissionIfNeed()
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.requestLocation()
     }
     
     func stopUpdatingLocation() {

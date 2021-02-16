@@ -9,8 +9,10 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var currencyCode = "Celsius(°C)"
-    var codes: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
+    @Binding var city: String
+    @Binding var updateForecast: Void
+    @State private var currencyUnits: String = AppState.System.units.rawValue
+    var units: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
     
     var closeButton: some View {
         Button(action: {
@@ -28,15 +30,20 @@ struct SettingsView: View {
                     .edgesIgnoringSafeArea(.all)
                 Form {
                     Section {
-                        Picker(selection: $currencyCode, label: Text("Temperature units")
+                        Picker(selection: $currencyUnits, label: Text("Temperature units")
                                 .lineLimit(.zero)
-                               .customFont(name: FontFamily.Roboto.regular.name, size: 18)
+                                .customFont(name: FontFamily.Roboto.regular.name, size: 18)
                         ) {
-                            ForEach(codes, id: \.self) { (string: String) in
-                                Text(string)
-                            }
+                            Text("Celsius(°C)").tag(0)
+                            Text("Fahrenheit(°F)").tag(1)
                         }
-                        RegionView()
+                        .onChange(of: currencyUnits) { _ in
+                            guard let index = (units.firstIndex { $0 == currencyUnits }) else {
+                                return
+                            }
+                            AppState.System.units = AppEnvironment.WeatherUnits.allCases[index]
+                        }
+                        RegionView(text: $city, updateForecast: $updateForecast)
                     }
                 }
             }

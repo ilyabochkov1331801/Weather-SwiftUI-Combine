@@ -14,10 +14,9 @@ class ContentViewRouter: Router, ContentRouterProtocol {
         )
     }
     
-    func presentSettings() {
-        let router = Router(isPresented: isNavigating)
+    func presentSettings(city: Binding<String>, updateForecast: Binding<Void>) {
         presentSheet (
-            SettingsView()
+            SettingsView(city: city, updateForecast: updateForecast)
         )
     }
 }
