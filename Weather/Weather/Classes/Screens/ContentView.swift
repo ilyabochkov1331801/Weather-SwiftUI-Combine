@@ -112,7 +112,6 @@ struct ContentView<Router: ContentRouterProtocol>: View {
         var onChangeHandler: () -> Void {
             return {
                 if self.forecast.city.name != "No name" {
-                    //self.convert(to: self.container.appState.value.system.units)
                     var buffer = self.forecast
                     buffer.weather.changeEach { item in
                         if self.container.appState.value.system.units == .degrees {
@@ -156,31 +155,6 @@ struct ContentView<Router: ContentRouterProtocol>: View {
         
         func currentDate() -> String {
             dateService.getCurrentDate()
-        }
-        
-        func convert(to units: AppEnvironment.WeatherUnits) {
-            print(self.forecast)
-            $forecast
-                .eraseToAnyPublisher()
-                .map {
-                    var buffer = $0
-                    buffer.weather.changeEach { item in
-                        if units == .degrees {
-                            item.info.feelsLike.toDegrees()
-                            item.info.temperature.toDegrees()
-                            item.info.minTemperature.toDegrees()
-                            item.info.maxTemperature.toDegrees()
-                        } else {
-                            item.info.feelsLike.toFarengheit()
-                            item.info.temperature.toFarengheit()
-                            item.info.minTemperature.toFarengheit()
-                            item.info.maxTemperature.toFarengheit()
-                        }
-                    }
-                    return buffer
-                }
-                .assign(to: \.forecast, on: self)
-                .store(in: cancelBag)
         }
         
         func showForecast() {
