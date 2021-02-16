@@ -9,8 +9,19 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var currencyCode: String = ""
-    var codes: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
+    @ObservedObject private var viewModel: ViewModel
+    @Binding var city: String
+    @Binding var updateForecast: Void
+    
+    let onChange: (() -> Void)?
+    private var units: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
+    
+    init(viewModel: ViewModel, city: Binding<String>, updateForecast: Binding<Void>, onChange: @escaping (() -> Void)) {
+        _city = city
+        _updateForecast = updateForecast
+        self.viewModel = viewModel
+        self.onChange = onChange
+    }
     
     var closeButton: some View {
         Button(action: {
@@ -28,15 +39,21 @@ struct SettingsView: View {
                     .edgesIgnoringSafeArea(.all)
                 Form {
                     Section {
-                        Picker(selection: $currencyCode, label: Text("Temperature units")
+                        Picker(selection: $viewModel.currencyUnits, label: Text("Temperature units")
                                 .lineLimit(.zero)
-                               .customFont(name: FontFamily.Roboto.regular.name, size: 18)
+                                .customFont(name: FontFamily.Roboto.regular.name, size: 18)
                         ) {
-                            ForEach(codes, id: \.self) { (string: String) in
-                                Text(string)
+                            ForEach(0..<units.count) {
+                                Text(self.units[$0]).tag($0)
                             }
                         }
-                        RegionView()
+                        .onChange(of: viewModel.currencyUnits) { _ in
+                            guard let closure = onChange else {
+                                return
+                            }
+                            closure()
+                        }
+                        RegionView(text: $city, updateForecast: $updateForecast)
                     }
                 }
             }
@@ -52,5 +69,26 @@ struct SettingsView: View {
         UINavigationBar.appearance().backgroundColor = Asset.charade.color
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(font: FontFamily.Roboto.bold, size: 20.0).unwrapped]
+    }
+    
+    class ViewModel: ObservableObject {
+        @Published var currencyUnits: Int
+        
+        let container: DependencyInjector
+        private var cancelBag = CancelBag()
+        
+        init(container: DependencyInjector) {
+            cancelBag = CancelBag()
+            self.container = container
+            let appState = container.appState
+            
+            _currencyUnits = .init(initialValue: appState.value.system.units.index ?? 0)
+            $currencyUnits
+                .sink {
+                    appState[\.system.units] = AppEnvironment.WeatherUnits.allCases[$0]
+                    print(appState.value.system.units.rawValue)
+                }
+                .store(in: cancelBag)
+        }
     }
 }

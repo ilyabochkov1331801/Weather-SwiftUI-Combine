@@ -35,3 +35,10 @@ extension View {
         return self.modifier(CustomFont(name: name, size: size, weight: weight))
     }
 }
+
+extension View {
+    func inject(_ container: DependencyInjector) -> some View {
+        return self
+            .environment(\.dependencyInjector, container)
+    }
+}

@@ -15,12 +15,12 @@ struct WeatherApp: App {
             ContentView(
                 router: ContentViewRouter(isPresented: .constant(false)),
                 viewModel: ContentView.ViewModel(
+                    container: appEnvironment.container,
                     weatherService: WeatherService(locationProvider: appEnvironment.container.providers.locationProvider,
                                                    apiProvider: appEnvironment.container.providers.apiProvider),
                     dateService: DateService()
                 )
             )
-            .environment(\.dependencyInjector, appEnvironment.container)
         }
     }
 }

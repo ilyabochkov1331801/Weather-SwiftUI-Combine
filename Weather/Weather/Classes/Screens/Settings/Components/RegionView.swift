@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct RegionView: View {
+    @Binding var text: String
+    @Binding var updateForecast: Void
     @State var toggle = false
-    @State var text: String = ""
     @State var trim: CGFloat = 1
+    
+    //var cityChangedClosure: () -> Void
     
     var body: some View {
         ZStack(alignment: .center) {
             TextField("Type city name...", text: $text, onCommit: {
                 withAnimation {
-                    self.toggle.toggle()
-                    self.trim = self.toggle ? 0 : 1
+                    toggle.toggle()
+                    trim = toggle ? 0 : 1
+                    updateForecast = ()
                 }
             })
             .foregroundColor(.white)
@@ -43,7 +47,7 @@ struct CellContentView: View {
     
     var body: some View {
         Button(action: {
-            animationCallback()
+             animationCallback()
         }, label: {
             HStack {
                 Text("Change region")

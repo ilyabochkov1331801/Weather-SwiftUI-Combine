@@ -31,9 +31,9 @@ struct NextDaysView: View {
                 Color(Asset.charade.name)
                     .edgesIgnoringSafeArea(.all)
                 ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 15) {
-                        ForEach(weather, id: \.self) { state in
-                            CellView(image: "cloudy", weather: state)
+                    VStack(spacing: 15) {                        
+                        ForEach(0..<weather.count) {
+                            CellView(image: weather[$0].iconName, weather: weather[$0])
                         }
                     }
                     .padding(.top, 60)

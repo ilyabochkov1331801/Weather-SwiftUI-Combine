@@ -18,7 +18,7 @@ struct CellView: View {
                 Circle()
                     .fill(Color(Asset.brightGray.color))
                     .frame(width: 70, height: 70)
-                Image(Asset.rain.name)
+                Image(image)
                     .resizable()
                     .frame(width: 50, height: 50)
                     .background(Color.clear)
@@ -42,26 +42,14 @@ struct CellView: View {
                             .lineLimit(.zero)
                             .customFont(name: FontFamily.Roboto.regular.name, size: 13)
                             .foregroundColor(Color(Asset.manatee.name))
+                        Text(weather.date.time() ?? "")
+                            .lineLimit(.zero)
+                            .customFont(name: FontFamily.Roboto.regular.name, size: 10)
+                            .foregroundColor(Color(Asset.manatee.name))
                     }
                 }
                 .frame(width: UIScreen.main.bounds.width.widthDependent() * 0.6, height: 70)
             }
         }
-    }
-}
-
-
-struct CellView_Previews: PreviewProvider {
-    static var previews: some View {
-        CellView(image: Asset.cloudy.name,
-                 weather: Weather(state: "Cloudy",
-                                  date: Date(),
-                                  info: WeatherInfo(temperature: 6.0,
-                                                    feelsLike: 6.0,
-                                                    minTemperature: 6.0,
-                                                    maxTemperature: 6.0,
-                                                    pressure: 6,
-                                                    humidity: 6),
-                                  wind: 6))
     }
 }

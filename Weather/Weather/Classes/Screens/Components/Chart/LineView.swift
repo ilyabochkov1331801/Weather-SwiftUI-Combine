@@ -60,7 +60,7 @@ struct LineView: View {
                                 .animation(Animation.easeOut(duration: 1).delay(1))
                         }
                         Line(data: self.data,
-                             frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - 30, height: reader.frame(in: .local).height)),
+                             frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - 40, height: reader.frame(in: .local).height)),
                              touchLocation: self.$indicatorLocation,
                              showIndicator: self.$hideHorizontalLines,
                              minDataValue: .constant(nil),
@@ -68,7 +68,7 @@ struct LineView: View {
                              showBackground: false,
                              gradient: self.style.gradientColor
                         )
-                        .offset(x: 30)
+                        .offset(x: 40)
                         .onAppear(){
                             self.showLegend = true
                         }

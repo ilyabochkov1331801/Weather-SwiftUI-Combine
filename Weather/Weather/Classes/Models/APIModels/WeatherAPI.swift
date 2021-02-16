@@ -16,7 +16,6 @@ struct WeatherAPI: Codable {
     let wind: WindAPI
     let visibility: Int
     let pop: Double
-    // no sys and dt_txt values
     
     enum CodingKeys: String, CodingKey {
         case date = "dt"
@@ -34,7 +33,7 @@ extension WeatherAPI: AppConvertable {
     
     func convert() -> AnyPublisher<Target, Never> {
         mainWeatherInfo.convert()
-            .map { Target(state: weatherState.first?.state ?? "",
+            .map { Target(state: (weatherState.first?.state ?? "No info", weatherState.first?.icon ?? "No info"),
                           date: Date(timeIntervalSince1970: date),
                           info: $0,
                           wind: wind.speed) }

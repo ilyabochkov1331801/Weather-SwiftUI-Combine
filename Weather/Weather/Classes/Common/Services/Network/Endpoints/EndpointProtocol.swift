@@ -24,7 +24,7 @@ extension EndpointProtocol {
         components.path = path
         
         components.queryItems = params.compactMap { URLQueryItem(name: $0.key, value: $0.value) }
-        
+        print(components.url?.absoluteURL)
         return components.url.flatMap { URLRequest(url: $0) }
     }
 }
