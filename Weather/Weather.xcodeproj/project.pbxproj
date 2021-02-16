@@ -12,6 +12,7 @@
 		331F9AD225D5195600B2A838 /* RegionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331F9AD125D5195600B2A838 /* RegionView.swift */; };
 		3325F69325C2A1A300BB1997 /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3325F69225C2A1A300BB1997 /* BottomButton.swift */; };
 		3377B44925D2DE560054E888 /* Binding + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3377B44825D2DE560054E888 /* Binding + Extension.swift */; };
+		337ADA6A25DBC8FD00D41AA9 /* CaseIterable + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337ADA6925DBC8FC00D41AA9 /* CaseIterable + Extension.swift */; };
 		338C437925D1469B000B1C94 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C436C25D1469B000B1C94 /* Roboto-Medium.ttf */; };
 		338C437A25D1469B000B1C94 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C436D25D1469B000B1C94 /* Roboto-Light.ttf */; };
 		338C437B25D1469B000B1C94 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338C436E25D1469B000B1C94 /* Roboto-Regular.ttf */; };
@@ -102,6 +103,7 @@
 		331F9AD125D5195600B2A838 /* RegionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionView.swift; sourceTree = "<group>"; };
 		3325F69225C2A1A300BB1997 /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		3377B44825D2DE560054E888 /* Binding + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding + Extension.swift"; sourceTree = "<group>"; };
+		337ADA6925DBC8FC00D41AA9 /* CaseIterable + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CaseIterable + Extension.swift"; sourceTree = "<group>"; };
 		338C436C25D1469B000B1C94 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		338C436D25D1469B000B1C94 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		338C436E25D1469B000B1C94 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				331F9ABE25D430F900B2A838 /* Date + Extension.swift */,
 				33AB5DF925DAB6B40093484B /* Double + Extension.swift */,
 				33AB5DFE25DAC1FA0093484B /* Array + Extension.swift */,
+				337ADA6925DBC8FC00D41AA9 /* CaseIterable + Extension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				EA8877EA257A8D4200CA0431 /* CloudsAPI.swift in Sources */,
 				33E27A5725D3E32A000A9E89 /* CellView.swift in Sources */,
 				33964AE725BEE47F0098E500 /* DateServiceProtocol.swift in Sources */,
+				337ADA6A25DBC8FD00D41AA9 /* CaseIterable + Extension.swift in Sources */,
 				33964AE425BEE46C0098E500 /* DateService.swift in Sources */,
 				33DCAD6E25C04B5D005DC918 /* Path + Extension.swift in Sources */,
 				33E27A5125D3DCE5000A9E89 /* NextDaysView.swift in Sources */,

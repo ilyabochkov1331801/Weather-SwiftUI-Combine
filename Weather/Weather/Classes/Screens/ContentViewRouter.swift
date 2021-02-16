@@ -8,15 +8,15 @@
 import SwiftUI
 
 class ContentViewRouter: Router, ContentRouterProtocol {
-    func presentNext(weather: Binding<[Weather]>) {
-        presentSheet(
-            NextDaysView(weather: weather)
+    func presentSettings<V>(view: V) where V : View {
+        presentSheet (
+           view
         )
     }
     
-    func presentSettings(city: Binding<String>, updateForecast: Binding<Void>) {
-        presentSheet (
-            SettingsView(city: city, updateForecast: updateForecast)
+    func presentNext(weather: Binding<[Weather]>) {
+        presentSheet(
+            NextDaysView(weather: weather)
         )
     }
 }

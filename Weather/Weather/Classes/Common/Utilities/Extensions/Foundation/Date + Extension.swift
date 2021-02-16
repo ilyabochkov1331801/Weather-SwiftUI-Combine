@@ -22,7 +22,7 @@ extension Date {
     
     func time() -> String? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
+        formatter.dateFormat = "h:mm a"
         return formatter.string(from: self)
     }
 }

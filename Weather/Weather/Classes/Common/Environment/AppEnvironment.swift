@@ -13,6 +13,15 @@ struct AppEnvironment {
     enum WeatherUnits: String, CaseIterable {
         case degrees = "Celsius(°C)"
         case fahrenheit = "Fahrenheit(°F)"
+        
+        static func fromString(string: String) -> WeatherUnits {
+            for type in WeatherUnits.allCases {
+                if type.rawValue == string {
+                    return type
+                }
+            }
+            return .degrees
+        }
     }
 }
 

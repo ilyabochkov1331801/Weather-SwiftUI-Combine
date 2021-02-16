@@ -6,7 +6,7 @@
 //
 
 import Combine
-import UIKit
+import SwiftUI
 
 struct AppState: Equatable {
     var userData = UserData()
@@ -29,7 +29,7 @@ extension AppState {
 
 extension AppState {
     struct System: Equatable {
-        static var units: AppEnvironment.WeatherUnits = .degrees
+        var units: AppEnvironment.WeatherUnits = .degrees
     }
 }
 

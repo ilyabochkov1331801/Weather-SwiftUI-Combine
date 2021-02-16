@@ -32,7 +32,7 @@ struct CardPreview: View {
                                 .foregroundColor(Color(Asset.midGray.name))
                         }
                         Spacer()
-                        Text(String(currentWeather.info.temperature))
+                        Text(String(currentWeather.info.temperature.rounded()))
                             .customFont(name: FontFamily.Roboto.regular.name, size: 30)
                             .foregroundColor(.white)
                     }

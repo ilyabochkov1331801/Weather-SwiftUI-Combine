@@ -9,10 +9,19 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject private var viewModel: ViewModel
     @Binding var city: String
     @Binding var updateForecast: Void
-    @State private var currencyUnits: String = AppState.System.units.rawValue
-    var units: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
+    
+    let onChange: (() -> Void)?
+    private var units: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
+    
+    init(viewModel: ViewModel, city: Binding<String>, updateForecast: Binding<Void>, onChange: @escaping (() -> Void)) {
+        _city = city
+        _updateForecast = updateForecast
+        self.viewModel = viewModel
+        self.onChange = onChange
+    }
     
     var closeButton: some View {
         Button(action: {
@@ -30,18 +39,19 @@ struct SettingsView: View {
                     .edgesIgnoringSafeArea(.all)
                 Form {
                     Section {
-                        Picker(selection: $currencyUnits, label: Text("Temperature units")
+                        Picker(selection: $viewModel.currencyUnits, label: Text("Temperature units")
                                 .lineLimit(.zero)
                                 .customFont(name: FontFamily.Roboto.regular.name, size: 18)
                         ) {
-                            Text("Celsius(°C)").tag(0)
-                            Text("Fahrenheit(°F)").tag(1)
+                            ForEach(0..<units.count) {
+                                Text(self.units[$0]).tag($0)
+                            }
                         }
-                        .onChange(of: currencyUnits) { _ in
-                            guard let index = (units.firstIndex { $0 == currencyUnits }) else {
+                        .onChange(of: viewModel.currencyUnits) { _ in
+                            guard let closure = onChange else {
                                 return
                             }
-                            AppState.System.units = AppEnvironment.WeatherUnits.allCases[index]
+                            closure()
                         }
                         RegionView(text: $city, updateForecast: $updateForecast)
                     }
@@ -59,5 +69,26 @@ struct SettingsView: View {
         UINavigationBar.appearance().backgroundColor = Asset.charade.color
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(font: FontFamily.Roboto.bold, size: 20.0).unwrapped]
+    }
+    
+    class ViewModel: ObservableObject {
+        @Published var currencyUnits: Int
+        
+        let container: DependencyInjector
+        private var cancelBag = CancelBag()
+        
+        init(container: DependencyInjector) {
+            cancelBag = CancelBag()
+            self.container = container
+            let appState = container.appState
+            
+            _currencyUnits = .init(initialValue: appState.value.system.units.index ?? 0)
+            $currencyUnits
+                .sink {
+                    appState[\.system.units] = AppEnvironment.WeatherUnits.allCases[$0]
+                    print(appState.value.system.units.rawValue)
+                }
+                .store(in: cancelBag)
+        }
     }
 }

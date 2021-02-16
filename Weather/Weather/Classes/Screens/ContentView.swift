@@ -9,12 +9,11 @@ import Combine
 import SwiftUI
 
 protocol ContentRouterProtocol: Router {
-    func presentSettings(city: Binding<String>, updateForecast: Binding<Void>)
+    func presentSettings<V: View>(view: V)
     func presentNext(weather: Binding<[Weather]>)
 }
 
 struct ContentView<Router: ContentRouterProtocol>: View {
-    @Environment(\.dependencyInjector) private var dependencyInjector: DependencyInjector
     @StateObject var viewModel: ViewModel
     @StateObject private var router: Router
     
@@ -29,8 +28,13 @@ struct ContentView<Router: ContentRouterProtocol>: View {
     
     var menuButton: some View {
         Button(action: {
-            router.presentSettings(city: $viewModel.city.name,
-                                   updateForecast: $viewModel.updateForecast)
+            let settingsView = SettingsView(viewModel: .init(container: viewModel.container),
+                                            city: $viewModel.city.name,
+                                            updateForecast: $viewModel.updateForecast,
+                                            onChange: viewModel.onChangeHandler)
+                .inject(viewModel.container)
+            router.presentSettings(view: settingsView)
+            
         }) {
             Image(Asset.menu.name)
                 .resizable()
@@ -92,6 +96,8 @@ struct ContentView<Router: ContentRouterProtocol>: View {
     }
     
     class ViewModel: ObservableObject {
+        let container: DependencyInjector
+        
         private let weatherService: WeatherService
         private let dateService: DateService
         private let cancelBag: CancelBag
@@ -102,9 +108,32 @@ struct ContentView<Router: ContentRouterProtocol>: View {
         @Published var hourlyWeather: [(String, Double)] = []
         @Published var dailyWeather: [Weather] = []
         @Published var updateForecast: Void = ()
-        @Published var updateUnits: AppEnvironment.WeatherUnits = .degrees
         
-        init(weatherService: WeatherService, dateService: DateService) {
+        var onChangeHandler: () -> Void {
+            return {
+                if self.forecast.city.name != "No name" {
+                    //self.convert(to: self.container.appState.value.system.units)
+                    var buffer = self.forecast
+                    buffer.weather.changeEach { item in
+                        if self.container.appState.value.system.units == .degrees {
+                            item.info.feelsLike.toDegrees()
+                            item.info.temperature.toDegrees()
+                            item.info.minTemperature.toDegrees()
+                            item.info.maxTemperature.toDegrees()
+                        } else {
+                            item.info.feelsLike.toFarengheit()
+                            item.info.temperature.toFarengheit()
+                            item.info.minTemperature.toFarengheit()
+                            item.info.maxTemperature.toFarengheit()
+                        }
+                    }
+                    self.forecast = buffer
+                }
+            }
+        }
+        
+        init(container: DependencyInjector, weatherService: WeatherService, dateService: DateService) {
+            self.container = container
             self.weatherService = weatherService
             self.dateService = dateService
             cancelBag = CancelBag()
@@ -123,18 +152,6 @@ struct ContentView<Router: ContentRouterProtocol>: View {
                     self.showForecast(by: self.city.name)
                 }
                 .store(in: cancelBag)
-            
-            $updateUnits
-                .eraseToAnyPublisher()
-                .sink {
-                    print($0)
-                } receiveValue: { [weak self] value in
-                    guard let self = self else { return }
-                    if self.forecast.city.name != "No name" {
-                        self.convert(to: self.updateUnits)
-                    }
-                }
-                .store(in: cancelBag)
         }
         
         func currentDate() -> String {
@@ -142,11 +159,10 @@ struct ContentView<Router: ContentRouterProtocol>: View {
         }
         
         func convert(to units: AppEnvironment.WeatherUnits) {
+            print(self.forecast)
             $forecast
                 .eraseToAnyPublisher()
-                .sink(receiveCompletion: {
-                    print($0)
-                }, receiveValue: {
+                .map {
                     var buffer = $0
                     buffer.weather.changeEach { item in
                         if units == .degrees {
@@ -161,8 +177,9 @@ struct ContentView<Router: ContentRouterProtocol>: View {
                             item.info.maxTemperature.toFarengheit()
                         }
                     }
-                    self.forecast = buffer
-                })
+                    return buffer
+                }
+                .assign(to: \.forecast, on: self)
                 .store(in: cancelBag)
         }
         

@@ -9,10 +9,10 @@ import Foundation
 
 extension Double {
     mutating func toFarengheit() {
-        self = (self * 9 / 5) + 32
+        self = ((self * 9 / 5) + 32).rounded()
     }
     
     mutating func toDegrees() {
-        self = (self - 32) * 5 / 9
+        self = ((self - 32) * 5 / 9).rounded()
     }
 }
