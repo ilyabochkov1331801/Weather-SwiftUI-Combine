@@ -13,8 +13,6 @@ struct RegionView: View {
     @State var toggle = false
     @State var trim: CGFloat = 1
     
-    //var cityChangedClosure: () -> Void
-    
     var body: some View {
         ZStack(alignment: .center) {
             TextField("Type city name...", text: $text, onCommit: {
@@ -24,7 +22,7 @@ struct RegionView: View {
                     updateForecast = ()
                 }
             })
-            .foregroundColor(.white)
+            .foregroundColor(.black)
             .background(Color.clear)
             AnimatedCellView(trim: $trim)
             CellContentView(grow: $toggle, text: $text) {
@@ -52,7 +50,7 @@ struct CellContentView: View {
             HStack {
                 Text("Change region")
                     .customFont(name: FontFamily.Roboto.regular.name, size: 18)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                 Spacer()
                 Text(text)
                     .customFont(name: FontFamily.Roboto.regular.name, size: 14)
@@ -78,7 +76,7 @@ struct AnimatedCellView: View {
                         maxWidth: self.grow
                             ? geo.frame(in: .global).width * self.trim
                             : 0)
-                    .foregroundColor(Color(Asset.shark.name))
+                    .foregroundColor(Color.white)
                     .animation(Animation.easeOut(duration: 1.2).delay(0.3))
             }
         }

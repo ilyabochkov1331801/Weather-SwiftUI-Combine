@@ -27,7 +27,7 @@ class LocationProvider: NSObject, LocationProviderProtocol {
         super.init()
         
         authorizationStatus = locationManager.authorizationStatus
-        startUpdatingLocation()
+        try? startUpdatingLocation()
     }
     
     deinit {
@@ -50,16 +50,17 @@ extension LocationProvider: CLLocationManagerDelegate {
 }
 
 private extension LocationProvider {
-    func askForPermissionIfNeed() {
+    func askForPermissionIfNeed() throws {
         switch authorizationStatus {
         case .some(.authorizedAlways), .some(.authorizedWhenInUse): break
+        case .denied: throw(LocationProvider.Errors.noLocationPermission)
         default: locationManager.requestWhenInUseAuthorization()
         }
     }
     
-    func startUpdatingLocation() {
+    func startUpdatingLocation() throws {
         locationManager.delegate = self
-        askForPermissionIfNeed()
+        try askForPermissionIfNeed()
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.requestLocation()
@@ -67,5 +68,18 @@ private extension LocationProvider {
     
     func stopUpdatingLocation() {
         locationManager.stopMonitoringSignificantLocationChanges()
+    }
+}
+
+extension LocationProvider {
+    enum Errors: Error, LocalizedError {
+        case noLocationPermission
+        
+        var errorDescription: String? {
+            switch self {
+            case .noLocationPermission:
+                return L10n.noLocationPermissionKey
+            }
+        }
     }
 }

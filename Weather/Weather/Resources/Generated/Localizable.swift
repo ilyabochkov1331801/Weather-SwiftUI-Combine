@@ -12,12 +12,12 @@ import Foundation
 internal enum L10n {
   /// Invalid request.
   internal static let invalidRequestKey = L10n.tr("Localizable", "invalidRequestKey")
-  /// Something went wrong.
+  /// Something went wrong. Please restart the app
   internal static let locationNilKey = L10n.tr("Localizable", "locationNilKey")
-  /// You've denied location authorization.
+  /// Please check your internet connection
+  internal static let network = L10n.tr("Localizable", "network")
+  /// You've denied location authorization. Please go to Settings -> Privacy -> Location and allow access
   internal static let noLocationPermissionKey = L10n.tr("Localizable", "noLocationPermissionKey")
-  /// Can't get city name.
-  internal static let placeMarkNil = L10n.tr("Localizable", "placeMarkNil")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

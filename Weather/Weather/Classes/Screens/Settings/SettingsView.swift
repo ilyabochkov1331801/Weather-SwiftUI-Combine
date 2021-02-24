@@ -21,6 +21,7 @@ struct SettingsView: View {
         _updateForecast = updateForecast
         self.viewModel = viewModel
         self.onChange = onChange
+        setupUI()
     }
     
     var closeButton: some View {
@@ -45,8 +46,9 @@ struct SettingsView: View {
                         ) {
                             ForEach(0..<units.count) {
                                 Text(self.units[$0]).tag($0)
-                            }
+                            }.preferredColorScheme(.light)
                         }
+                        .listRowBackground(Color.white)
                         .onChange(of: viewModel.currencyUnits) { _ in
                             guard let closure = onChange else {
                                 return
@@ -54,7 +56,7 @@ struct SettingsView: View {
                             closure()
                         }
                         RegionView(text: $city, updateForecast: $updateForecast)
-                    }
+                    }.listRowBackground(Color.white)
                 }
             }
             .edgesIgnoringSafeArea(.all)
@@ -64,8 +66,9 @@ struct SettingsView: View {
     }
     
     func setupUI() {
+        UITableView.appearance().backgroundColor = Asset.charade.color
+        
         UINavigationBar.appearance().barTintColor = .clear
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().backgroundColor = Asset.charade.color
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(font: FontFamily.Roboto.bold, size: 20.0).unwrapped]

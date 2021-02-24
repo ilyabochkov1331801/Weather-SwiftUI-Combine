@@ -9,9 +9,11 @@
 //MARK: - Errors
 
 //Location
-noLocationPermissionKey = "You've denied location authorization.";
-locationNilKey = "Something went wrong.";
-placeMarkNil = "Can't get city name.";
+noLocationPermissionKey = "You've denied location authorization. Please go to Settings -> Privacy -> Location and allow access";
+locationNilKey = "Something went wrong. Please restart the app";
 
 //API
 invalidRequestKey = "Invalid request.";
+
+//Network
+network = "Please check your internet connection";
