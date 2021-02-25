@@ -8,7 +8,7 @@
 import Foundation
 
 extension Double {
-    mutating func toFarengheit() {
+    mutating func toFahrenheit() {
         self = ((self * 9 / 5) + 32).rounded()
     }
     

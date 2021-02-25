@@ -9,11 +9,14 @@
 //MARK: - Errors
 
 //Location
-noLocationPermissionKey = "You've denied location authorization. Please go to Settings -> Privacy -> Location and allow access";
-locationNilKey = "Something went wrong. Please restart the app";
+noLocationPermissionKey = "You've denied location authorization. Please go to Settings -> Privacy -> Location and allow access.";
+locationNilKey = "Something went wrong. Please restart the app.";
 
 //API
-invalidRequestKey = "Invalid request.";
+invalidRequestKey = "Server error. Please contact us and report the problem.";
 
 //Network
-network = "Please check your internet connection";
+network = "Please check your internet connection.";
+
+// Decoding
+decodingError = "Decoding error. Please contact us and report the problem.";

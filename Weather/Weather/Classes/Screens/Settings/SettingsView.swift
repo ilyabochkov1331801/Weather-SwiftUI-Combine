@@ -73,25 +73,4 @@ struct SettingsView: View {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(font: FontFamily.Roboto.bold, size: 20.0).unwrapped]
     }
-    
-    class ViewModel: ObservableObject {
-        @Published var currencyUnits: Int
-        
-        let container: DependencyInjector
-        private var cancelBag = CancelBag()
-        
-        init(container: DependencyInjector) {
-            cancelBag = CancelBag()
-            self.container = container
-            let appState = container.appState
-            
-            _currencyUnits = .init(initialValue: appState.value.system.units.index ?? 0)
-            $currencyUnits
-                .sink {
-                    appState[\.system.units] = AppEnvironment.WeatherUnits.allCases[$0]
-                    print(appState.value.system.units.rawValue)
-                }
-                .store(in: cancelBag)
-        }
-    }
 }

@@ -14,9 +14,17 @@ class APIProvider {
             return Fail(error: APIProvider.Errors.invalidRequest)
                 .eraseToAnyPublisher()
         }
-            
+        
         return request.execute()
             .decode(type: Endpoint.EndpointData.self, decoder: JSONDecoder())
+            .mapError { error in
+                switch error {
+                case is Swift.DecodingError:
+                    return WeatherService.Errors.decodingError
+                default:
+                    return error
+                }
+            }
             .flatMap { $0.convert() }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NextDaysView: View {
+struct DailyWeatherView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var weather: [Weather]
     
