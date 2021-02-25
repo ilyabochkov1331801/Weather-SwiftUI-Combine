@@ -31,9 +31,7 @@ struct RegionView: View {
                     self.trim = self.toggle ? 0 : 1
                 }
             }
-            
         }
-        
     }
 }
 
@@ -55,6 +53,7 @@ struct CellContentView: View {
                 Text(text)
                     .customFont(name: FontFamily.Roboto.regular.name, size: 14)
                     .foregroundColor(.gray)
+                    .padding(.trailing, 10)
             }
             .padding(.trailing, 30)
         })

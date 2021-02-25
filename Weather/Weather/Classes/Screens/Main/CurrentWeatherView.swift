@@ -75,7 +75,7 @@ struct CurrentWeatherView<Router: CurrentWeatherViewRouterProtocol>: View {
                         })
                         .offset(y: UIScreen.main.bounds.height / 5 )
                     }
-                }.offset(y: 80)
+                }.frame(height: UIScreen.main.bounds.height - 100)
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("Today \(viewModel.currentDate())", displayMode: .inline)
