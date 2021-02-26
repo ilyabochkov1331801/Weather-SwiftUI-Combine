@@ -17,6 +17,7 @@ class LocationProvider: NSObject, LocationProviderProtocol {
     var location: AnyPublisher<CLLocation, Error> {
         locationSubject
             .compactMap { $0 }
+            .mapError { _ in LocationProvider.Errors.noLocationPermission }
             .eraseToAnyPublisher()
     }
     
@@ -67,5 +68,18 @@ private extension LocationProvider {
     
     func stopUpdatingLocation() {
         locationManager.stopMonitoringSignificantLocationChanges()
+    }
+}
+
+extension LocationProvider {
+    enum Errors: Error, LocalizedError {
+        case noLocationPermission
+        
+        var errorDescription: String? {
+            switch self {
+            case .noLocationPermission:
+                return L10n.noLocationPermissionKey
+            }
+        }
     }
 }

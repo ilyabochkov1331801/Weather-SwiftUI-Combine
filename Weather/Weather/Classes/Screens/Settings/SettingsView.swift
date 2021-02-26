@@ -14,13 +14,14 @@ struct SettingsView: View {
     @Binding var updateForecast: Void
     
     let onChange: (() -> Void)?
-    private var units: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
+    private var units: [String] = [L10n.celsius, L10n.fahrenheit]
     
     init(viewModel: ViewModel, city: Binding<String>, updateForecast: Binding<Void>, onChange: @escaping (() -> Void)) {
         _city = city
         _updateForecast = updateForecast
         self.viewModel = viewModel
         self.onChange = onChange
+        setupUI()
     }
     
     var closeButton: some View {
@@ -39,14 +40,15 @@ struct SettingsView: View {
                     .edgesIgnoringSafeArea(.all)
                 Form {
                     Section {
-                        Picker(selection: $viewModel.currencyUnits, label: Text("Temperature units")
+                        Picker(selection: $viewModel.currencyUnits, label: Text(L10n.temperatureUnits)
                                 .lineLimit(.zero)
                                 .customFont(name: FontFamily.Roboto.regular.name, size: 18)
                         ) {
                             ForEach(0..<units.count) {
                                 Text(self.units[$0]).tag($0)
-                            }
+                            }.preferredColorScheme(.light)
                         }
+                        .listRowBackground(Color.white)
                         .onChange(of: viewModel.currencyUnits) { _ in
                             guard let closure = onChange else {
                                 return
@@ -54,41 +56,21 @@ struct SettingsView: View {
                             closure()
                         }
                         RegionView(text: $city, updateForecast: $updateForecast)
-                    }
+                    }.listRowBackground(Color.white)
                 }
             }
             .edgesIgnoringSafeArea(.all)
-            .navigationBarTitle("Settings", displayMode: .inline)
+            .navigationBarTitle(L10n.settings, displayMode: .inline)
             .navigationBarItems(trailing: closeButton)
         }
     }
     
     func setupUI() {
+        UITableView.appearance().backgroundColor = Asset.charade.color
+        
         UINavigationBar.appearance().barTintColor = .clear
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().backgroundColor = Asset.charade.color
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(font: FontFamily.Roboto.bold, size: 20.0).unwrapped]
-    }
-    
-    class ViewModel: ObservableObject {
-        @Published var currencyUnits: Int
-        
-        let container: DependencyInjector
-        private var cancelBag = CancelBag()
-        
-        init(container: DependencyInjector) {
-            cancelBag = CancelBag()
-            self.container = container
-            let appState = container.appState
-            
-            _currencyUnits = .init(initialValue: appState.value.system.units.index ?? 0)
-            $currencyUnits
-                .sink {
-                    appState[\.system.units] = AppEnvironment.WeatherUnits.allCases[$0]
-                    print(appState.value.system.units.rawValue)
-                }
-                .store(in: cancelBag)
-        }
     }
 }

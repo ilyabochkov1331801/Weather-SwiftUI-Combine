@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class ContentViewRouter: Router, ContentRouterProtocol {
+class CurrentWeatherViewRouter: Router, CurrentWeatherViewRouterProtocol {
     func presentSettings<V>(view: V) where V : View {
         presentSheet (
            view
@@ -16,7 +16,7 @@ class ContentViewRouter: Router, ContentRouterProtocol {
     
     func presentNext(weather: Binding<[Weather]>) {
         presentSheet(
-            NextDaysView(weather: weather)
+            DailyWeatherView(weather: weather)
         )
     }
 }

@@ -12,9 +12,9 @@ struct WeatherApp: App {
     var body: some Scene {
         let appEnvironment = AppEnvironment.bootstrap()
         return WindowGroup {
-            ContentView(
-                router: ContentViewRouter(isPresented: .constant(false)),
-                viewModel: ContentView.ViewModel(
+            CurrentWeatherView(
+                router: CurrentWeatherViewRouter(isPresented: .constant(false)),
+                viewModel: CurrentWeatherView.ViewModel(
                     container: appEnvironment.container,
                     weatherService: WeatherService(locationProvider: appEnvironment.container.providers.locationProvider,
                                                    apiProvider: appEnvironment.container.providers.apiProvider),

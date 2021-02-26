@@ -40,18 +40,12 @@ class WeatherService: WeatherServiceProtocol {
 
 extension WeatherService {
     enum Errors: Error, LocalizedError {
-        case noLocationPermission
-        case locationNil
-        case placeMarkNil
+        case decodingError
         
         var errorDescription: String? {
             switch self {
-            case .noLocationPermission:
-                return L10n.noLocationPermissionKey
-            case .locationNil:
-                return L10n.locationNilKey
-            case .placeMarkNil:
-                return L10n.placeMarkNil
+            case .decodingError:
+                return L10n.decodingError
             }
         }
     }
