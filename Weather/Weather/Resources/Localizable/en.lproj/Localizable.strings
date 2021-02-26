@@ -20,3 +20,15 @@ network = "Please check your internet connection.";
 
 // Decoding
 decodingError = "Decoding error. Please contact us and report the problem.";
+
+cancel = "Cancel";
+attention = "Attention!!!";
+today = "Today";
+hourlyWeather = "Weather each 3 hours";
+typeCityName = "Type city name...";
+changeRegion = "Change region";
+temperatureUnits = "Temperature units";
+submit = "Submit...";
+celsius = "Celsius(°C)";
+fahrenheit = "Fahrenheit(°F)";
+settings = "Settings";

@@ -24,6 +24,7 @@ struct CurrentWeatherView<Router: CurrentWeatherViewRouterProtocol>: View {
         viewModel.showForecast()
     }
     @State var trim: CGFloat = 0
+    @State var firstSettingsAppear: Bool = true
     
     var menuButton: some View {
         Button(action: {
@@ -32,8 +33,12 @@ struct CurrentWeatherView<Router: CurrentWeatherViewRouterProtocol>: View {
                                             updateForecast: $viewModel.updateForecast,
                                             onChange: viewModel.onChangeHandler)
                 .inject(viewModel.container)
+                .onAppear {
+                    guard firstSettingsAppear else { return }
+                    viewModel.setForecastPublisher()
+                    firstSettingsAppear = false
+                }
             router.presentSettings(view: settingsView)
-            
         }) {
             Image(Asset.menu.name)
                 .resizable()
@@ -50,7 +55,7 @@ struct CurrentWeatherView<Router: CurrentWeatherViewRouterProtocol>: View {
                     CardPreview(city: $viewModel.city, currentWeather: $viewModel.currentWeather)
                         .padding(.horizontal)
                     
-                    LineView(data: $viewModel.hourlyWeather, title: "Today", legend: "Weather each 3 hours",
+                    LineView(data: $viewModel.hourlyWeather, title: L10n.today, legend: L10n.hourlyWeather,
                              style: ChartStyle(backgroundColor: .clear,
                                                accentColor: Color(Asset.manatee.name),
                                                gradientColor: GradientColor(start: Color(Asset.malibu.name),
@@ -76,15 +81,16 @@ struct CurrentWeatherView<Router: CurrentWeatherViewRouterProtocol>: View {
                         .offset(y: UIScreen.main.bounds.height / 5 )
                     }
                 }.frame(height: UIScreen.main.bounds.height - 100)
+                
             }
             .edgesIgnoringSafeArea(.all)
-            .navigationBarTitle("Today \(viewModel.currentDate())", displayMode: .inline)
+            .navigationBarTitle("\(L10n.today) \(viewModel.currentDate())", displayMode: .inline)
             .navigationBarItems(trailing: menuButton)
         }
         .alert(isPresented: $viewModel.error.1, content: {
-            Alert(title: Text("Attention!!!"), message: Text(viewModel.error.0.localizedDescription), dismissButton: .default(Text("Cancel")))
+            Alert(title: Text(L10n.attention), message: Text(viewModel.error.0.localizedDescription), dismissButton: .cancel())
         })
-        
+//        .textFieldAlert(isShowing: $viewModel.addCity.1, text: $viewModel.city.name, title: L10n.attention, message: viewModel.addCity.0.localizedDescription)
     }
     
     func setupUI() {

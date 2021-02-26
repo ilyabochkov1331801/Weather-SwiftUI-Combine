@@ -15,7 +15,7 @@ struct RegionView: View {
     
     var body: some View {
         ZStack(alignment: .center) {
-            TextField("Type city name...", text: $text, onCommit: {
+            TextField(L10n.typeCityName, text: $text, onCommit: {
                 withAnimation {
                     toggle.toggle()
                     trim = toggle ? 0 : 1
@@ -46,7 +46,7 @@ struct CellContentView: View {
              animationCallback()
         }, label: {
             HStack {
-                Text("Change region")
+                Text(L10n.changeRegion)
                     .customFont(name: FontFamily.Roboto.regular.name, size: 18)
                     .foregroundColor(.black)
                 Spacer()

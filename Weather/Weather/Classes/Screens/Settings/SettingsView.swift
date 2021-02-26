@@ -14,7 +14,7 @@ struct SettingsView: View {
     @Binding var updateForecast: Void
     
     let onChange: (() -> Void)?
-    private var units: [String] = ["Celsius(°C)", "Fahrenheit(°F)"]
+    private var units: [String] = [L10n.celsius, L10n.fahrenheit]
     
     init(viewModel: ViewModel, city: Binding<String>, updateForecast: Binding<Void>, onChange: @escaping (() -> Void)) {
         _city = city
@@ -40,7 +40,7 @@ struct SettingsView: View {
                     .edgesIgnoringSafeArea(.all)
                 Form {
                     Section {
-                        Picker(selection: $viewModel.currencyUnits, label: Text("Temperature units")
+                        Picker(selection: $viewModel.currencyUnits, label: Text(L10n.temperatureUnits)
                                 .lineLimit(.zero)
                                 .customFont(name: FontFamily.Roboto.regular.name, size: 18)
                         ) {
@@ -60,7 +60,7 @@ struct SettingsView: View {
                 }
             }
             .edgesIgnoringSafeArea(.all)
-            .navigationBarTitle("Settings", displayMode: .inline)
+            .navigationBarTitle(L10n.settings, displayMode: .inline)
             .navigationBarItems(trailing: closeButton)
         }
     }

@@ -113,7 +113,18 @@ extension CurrentWeatherView {
                     }
                 }
                 .eraseToAnyPublisher()
-                .sink( receiveValue: {
+                .sink(receiveCompletion: {
+                    switch $0 {
+                    case .finished:
+                        self.setCurrentWeatherPublisher()
+                        self.setHourlySelectionPublisher()
+                        self.setDailyWeatherPublisher()
+                        self.setCityPublisher()
+                    case .failure(let error):
+                        self.error.0 = error
+                        self.error.1 = true
+                    }
+                } , receiveValue: {
                     self.forecast = $0
                 })
                 .store(in: cancelBag)
@@ -133,7 +144,18 @@ extension CurrentWeatherView {
                     }
                 }
                 .eraseToAnyPublisher()
-                .sink( receiveValue: {
+                .sink(receiveCompletion: {
+                    switch $0 {
+                    case .finished:
+                        self.setCurrentWeatherPublisher()
+                        self.setHourlySelectionPublisher()
+                        self.setDailyWeatherPublisher()
+                        self.setCityPublisher()
+                    case .failure(let error):
+                        self.error.0 = error
+                        self.error.1 = true
+                    }
+                } , receiveValue: {
                     self.forecast = $0
                 })
                 .store(in: cancelBag)
@@ -204,7 +226,6 @@ extension CurrentWeatherView {
             self.setHourlySelectionPublisher()
             self.setDailyWeatherPublisher()
             self.setCityPublisher()
-            self.setForecastPublisher()
         }
     }
 }
