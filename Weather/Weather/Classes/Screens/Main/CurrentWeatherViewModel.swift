@@ -125,6 +125,7 @@ extension CurrentWeatherView {
                         self.error.1 = true
                     }
                 } , receiveValue: {
+                    self.container.appState[\.system.units] = AppEnvironment.WeatherUnits.degrees
                     self.forecast = $0
                 })
                 .store(in: cancelBag)
@@ -156,6 +157,7 @@ extension CurrentWeatherView {
                         self.error.1 = true
                     }
                 } , receiveValue: {
+                    self.container.appState[\.system.units] = AppEnvironment.WeatherUnits.degrees
                     self.forecast = $0
                 })
                 .store(in: cancelBag)
