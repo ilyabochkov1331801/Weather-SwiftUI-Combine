@@ -243,6 +243,7 @@
 		33880A2325E67A5C000E0E33 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				33964B0925BEFDFE0098E500 /* Components */,
 				338C43A525D14E9F000B1C94 /* CurrentWeatherViewRouter.swift */,
 				33AAFDA72578EBE1006FD448 /* CurrentWeatherView.swift */,
 				33880A2725E67B55000E0E33 /* CurrentWeatherViewModel.swift */,
@@ -660,7 +661,6 @@
 				33880A2325E67A5C000E0E33 /* Main */,
 				331F9AC225D4355A00B2A838 /* Settings */,
 				33E27A4F25D3DCCE000A9E89 /* NextDays */,
-				33964B0925BEFDFE0098E500 /* Components */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
