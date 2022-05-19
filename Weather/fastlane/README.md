@@ -23,21 +23,24 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Run tests
 
-### ios dev_branch
+### ios prepare_dev
 
 ```sh
-[bundle exec] fastlane ios dev_branch
+[bundle exec] fastlane ios prepare_dev
 ```
 
-Make changes on dev branch
+Release preparation on dev branch
+  Params: 
+  1. bump_type - The type of this version bump. Available: patch, minor, major (ex. bump_type:patch) (optional)
+  2. version - Specific app version (ex. version:1.0.3) (optional)
 
-### ios master_branch
+### ios prepare_master
 
 ```sh
-[bundle exec] fastlane ios master_branch
+[bundle exec] fastlane ios prepare_master
 ```
 
-Make changes on master branch
+Release actions on master branch
 
 ### ios submit_prod_build
 
