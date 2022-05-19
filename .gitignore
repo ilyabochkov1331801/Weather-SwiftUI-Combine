@@ -51,11 +51,11 @@ playground.xcworkspace
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/#source-control
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
-fastlane/.env.secret
+Weather/fastlane/report.xml
+Weather/fastlane/Preview.html
+Weather/fastlane/screenshots
+Weather/fastlane/test_output
+Weather/fastlane/.env.secret
 
 
 ### Swift.Carthage Stack ###
