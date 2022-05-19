@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  Weather
+
+  Created by Alena Nesterkina on 3.12.20.
+  
+*/
+
+//MARK: - Errors
+
+//Location
+noLocationPermissionKey = "You've denied location authorization. Please go to Settings -> Privacy -> Location and allow access.";
+locationNilKey = "Something went wrong. Please restart the app.";
+
+//API
+invalidRequestKey = "Server error. Please contact us and report the problem.";
+
+//Network
+network = "Please check your internet connection.";
+
+// Decoding
+decodingError = "Decoding error. Please contact us and report the problem.";
+
+cancel = "Cancel";
+attention = "Attention!!!";
+today = "Today";
+hourlyWeather = "Weather each 3 hours";
+typeCityName = "Type city name...";
+changeRegion = "Change region";
+temperatureUnits = "Temperature units";
+submit = "Submit...";
+celsius = "Celsius(°C)";
+fahrenheit = "Fahrenheit(°F)";
+settings = "Settings";

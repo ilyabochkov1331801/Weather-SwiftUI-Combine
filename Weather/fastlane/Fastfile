@@ -1,0 +1,85 @@
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Run tests"
+  lane :run_all_tests do
+    scan
+  end
+
+  desc "Make changes on dev branch"
+  lane :dev_branch do |options|
+    check_dev_branch
+    update_version(
+      bump_type: options[:bump_type],
+      version: options[:version]
+    )
+    push_to_git_remote
+  end
+
+  desc "Make changes on master branch"
+  lane :master_branch do |options|
+    check_master_branch
+    add_tag(tag: options[:tag])
+  end
+
+  desc "Submit a new App Store Build to TestFlight"
+  lane :submit_prod_build do |options|
+    check_branch
+
+  end
+
+######################### PRIVATE LANES #########################
+
+desc "Update and commit build and version numbers"
+  private_lane :update_version do |options|
+    if options[:bump_type] 
+      increment_version_number(
+        bump_type: options[:bump_type]
+      ) 
+      increment_build_number(build_number: "1")
+    elsif options[:version]
+      increment_version_number(
+        version_number: options[:version]
+      )
+      increment_build_number(build_number: "1")
+    else
+      increment_build_number
+    end
+    commit_version_bump
+  end
+
+  desc "Check if dev is current git branch"
+  private_lane :check_dev_branch do
+    if git_branch != "develop"
+      UI.user_error! "Error: Please checkout dev branch"
+    end
+  end
+
+  desc "Check if master is current git branch"
+  private_lane :check_master_branch do
+    if git_branch != "master"
+      UI.user_error! "Error: Please checkout master branch"
+    end
+  end
+
+  desc "Add git tag"
+  private_lane :add_tag do |options|
+    tagMessage = prompt(
+      text: "Tag message: "
+    )
+    if options[:tag]
+      add_git_tag(
+        tag: options[:tag],
+        message: tagMessage
+        )
+    else
+      add_git_tag(prefix: "v",
+      message: tagMessage
+      )
+    end
+    push_git_tags
+  end
+
+end
