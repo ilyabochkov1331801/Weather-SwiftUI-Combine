@@ -45,7 +45,7 @@ platform :ios do
   lane :dev_branch do |options|
     check_branch
     update_version(
-      bump_type: options[:bunp_type],
+      bump_type: options[:bump_type],
       version: options[:version]
     )
     commit_changes
