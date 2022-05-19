@@ -31,6 +31,14 @@ Run tests
 
 Make changes on dev branch
 
+### ios master_branch
+
+```sh
+[bundle exec] fastlane ios master_branch
+```
+
+Make changes on master branch
+
 ### ios submit_prod_build
 
 ```sh

@@ -22,12 +22,22 @@ platform :ios do
   lane :master_branch do |options|
     check_master_branch
     add_tag(tag: options[:tag])
+    release_tag
+    run_all_tests
   end
 
   desc "Submit a new App Store Build to TestFlight"
   lane :submit_prod_build do |options|
-    check_branch
-
+    match(
+      type: "appstore",
+      readonly: true
+      )
+    gym(
+      scheme: "Weather",
+      clean: true
+    )
+    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "yfmb-bbjz-nzcl-gilg"
+    pilot
   end
 
 ######################### PRIVATE LANES #########################
@@ -75,11 +85,29 @@ desc "Update and commit build and version numbers"
         message: tagMessage
         )
     else
-      add_git_tag(prefix: "v",
-      message: tagMessage
+      version = get_version_number(xcodeproj: "Weather.xcodeproj")
+      add_git_tag(
+        tag: "v" + version,
+        message: tagMessage
       )
+      ENV["TAG"] = "v" + version
     end
     push_git_tags
+  end
+
+  desc "Make release tag"
+  private_lane :release_tag do
+    releaseDescription = prompt(
+      text: "Release tag description: ",
+      multi_line_end_keyword: "END"
+    )
+    set_github_release(
+      repository_name: "ilyabochkov1331801/Weather-SwiftUI-Combine",
+      api_token: "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",
+      name: ENV["TAG"],
+      tag_name: ENV["TAG"],
+      description: releaseDescription
+    )
   end
 
 end
