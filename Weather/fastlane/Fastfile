@@ -3,7 +3,36 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Update and commit build and version numbers"
+  desc "Run tests"
+  lane :run_all_tests do
+    scan
+  end
+
+  desc "Make changes on dev branch"
+  lane :dev_branch do |options|
+    check_dev_branch
+    update_version(
+      bump_type: options[:bump_type],
+      version: options[:version]
+    )
+    push_to_git_remote
+  end
+
+  desc "Make changes on master branch"
+  lane :master_branch do |options|
+    check_master_branch
+    add_tag(tag: options[:tag])
+  end
+
+  desc "Submit a new App Store Build to TestFlight"
+  lane :submit_prod_build do |options|
+    check_branch
+
+  end
+
+######################### PRIVATE LANES #########################
+
+desc "Update and commit build and version numbers"
   private_lane :update_version do |options|
     if options[:bump_type] 
       increment_version_number(
@@ -21,31 +50,36 @@ platform :ios do
     commit_version_bump
   end
 
-  desc "Check current git branch"
-  private_lane :check_branch do
+  desc "Check if dev is current git branch"
+  private_lane :check_dev_branch do
     if git_branch != "develop"
       UI.user_error! "Error: Please checkout dev branch"
     end
   end
 
-  desc "Run tests"
-  lane :run_all_tests do
-    scan
+  desc "Check if master is current git branch"
+  private_lane :check_master_branch do
+    if git_branch != "master"
+      UI.user_error! "Error: Please checkout master branch"
+    end
   end
 
-  desc "Make changes on dev branch"
-  lane :dev_branch do |options|
-    check_branch
-    update_version(
-      bump_type: options[:bump_type],
-      version: options[:version]
+  desc "Add git tag"
+  private_lane :add_tag do |options|
+    tagMessage = prompt(
+      text: "Tag message: "
     )
-    push_to_git_remote
+    if options[:tag]
+      add_git_tag(
+        tag: options[:tag],
+        message: tagMessage
+        )
+    else
+      add_git_tag(prefix: "v",
+      message: tagMessage
+      )
+    end
+    push_git_tags
   end
 
-  desc "Submit a new App Store Build to TestFlight"
-  lane :submit_prod_build do |options|
-    check_branch
-
-  end
 end
