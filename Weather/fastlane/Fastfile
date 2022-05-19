@@ -1,0 +1,59 @@
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Update build and version numbers"
+  private_lane :update_version do |options|
+    if options[:bump_type] 
+      increment_version_number(
+        bump_type: options[:bump_type]
+      ) 
+      increment_build_number(build_number: "1")
+    elsif options[:version]
+      increment_version_number(
+        version_number: options[:version]
+      )
+      increment_build_number(build_number: "1")
+    else
+      increment_build_number
+    end
+  end
+
+  desc "Check current git branch"
+  private_lane :check_branch do
+    if git_branch != "develop"
+      UI.user_error! "Error: Please checkout dev branch"
+    end
+  end
+
+  desc "Run tests"
+  lane :run_all_tests do
+    scan
+  end
+
+  desc "Commit changes on dev branch"
+  private_lane :commit_changes do
+    commitMessage = prompt(
+      text: "Commit message: "
+    )
+
+    git_commit(path: ["./**/**"], message: commitMessage)
+  end
+
+  desc "Make changes on dev branch"
+  lane :dev_branch do |options|
+    check_branch
+    update_version(
+      bump_type: options[:bunp_type],
+      version: options[:version]
+    )
+    commit_changes
+  end
+
+  desc "Submit a new App Store Build to TestFlight"
+  lane :submit_prod_build do |options|
+    check_branch
+
+  end
+end

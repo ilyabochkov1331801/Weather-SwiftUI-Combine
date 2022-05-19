@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000723">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: Switch to ios check_branch lane" time="0.000189">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: git_branch" time="0.013439">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: Switch to ios update_version lane" time="0.00027">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: increment_build_number" time="1.276396">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: Switch to ios commit_changes lane" time="0.000313">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: prompt" time="3.441245">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="7: git_commit" time="0.089135">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
