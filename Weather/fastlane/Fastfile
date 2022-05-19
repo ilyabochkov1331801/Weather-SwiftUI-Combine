@@ -2,14 +2,27 @@
 
 default_platform(:ios)
 
+repoName = "ilyabochkov1331801/Weather-SwiftUI-Combine"
+apiToken = "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"
+project = "Weather.xcodeproj"
+release_scheme = "Weather"
+release_tag = ""
+
+ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "yfmb-bbjz-nzcl-gilg"
+
 platform :ios do
   desc "Run tests"
   lane :run_all_tests do
     scan
   end
 
-  desc "Make changes on dev branch"
-  lane :dev_branch do |options|
+  ######################### DEV BRANCH ACTIONS #########################
+
+  desc "Release preparation on dev branch
+  Params: 
+  1. bump_type - The type of this version bump. Available: patch, minor, major (ex. bump_type:patch) (optional)
+  2. version - Specific app version (ex. version:1.0.3) (optional)"
+  lane :prepare_dev do |options|
     check_dev_branch
     update_version(
       bump_type: options[:bump_type],
@@ -18,31 +31,14 @@ platform :ios do
     push_to_git_remote
   end
 
-  desc "Make changes on master branch"
-  lane :master_branch do |options|
-    check_master_branch
-    add_tag(tag: options[:tag])
-    release_tag
-    run_all_tests
+  desc "Check if dev is current git branch"
+  private_lane :check_dev_branch do
+    if git_branch != "dev"
+      UI.user_error! "Error: Please checkout dev branch"
+    end
   end
 
-  desc "Submit a new App Store Build to TestFlight"
-  lane :submit_prod_build do |options|
-    match(
-      type: "appstore",
-      readonly: true
-      )
-    gym(
-      scheme: "Weather",
-      clean: true
-    )
-    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "yfmb-bbjz-nzcl-gilg"
-    pilot
-  end
-
-######################### PRIVATE LANES #########################
-
-desc "Update and commit build and version numbers"
+  desc "Update and commit build and version numbers"
   private_lane :update_version do |options|
     if options[:bump_type] 
       increment_version_number(
@@ -60,11 +56,14 @@ desc "Update and commit build and version numbers"
     commit_version_bump
   end
 
-  desc "Check if dev is current git branch"
-  private_lane :check_dev_branch do
-    if git_branch != "develop"
-      UI.user_error! "Error: Please checkout dev branch"
-    end
+  ######################### MAIN BRANCH ACTIONS #########################
+
+  desc "Release actions on master branch"
+  lane :prepare_master do
+    check_master_branch
+    add_tag
+    release_tag
+    run_all_tests
   end
 
   desc "Check if master is current git branch"
@@ -75,23 +74,16 @@ desc "Update and commit build and version numbers"
   end
 
   desc "Add git tag"
-  private_lane :add_tag do |options|
+  private_lane :add_tag do
     tagMessage = prompt(
       text: "Tag message: "
     )
-    if options[:tag]
-      add_git_tag(
-        tag: options[:tag],
-        message: tagMessage
-        )
-    else
-      version = get_version_number(xcodeproj: "Weather.xcodeproj")
-      add_git_tag(
-        tag: "v" + version,
-        message: tagMessage
-      )
-      ENV["TAG"] = "v" + version
-    end
+    version = get_version_number(xcodeproj: project)
+    add_git_tag(
+      tag: "v" + version,
+      message: tagMessage
+    )
+    release_tag = "v" + version
     push_git_tags
   end
 
@@ -102,12 +94,29 @@ desc "Update and commit build and version numbers"
       multi_line_end_keyword: "END"
     )
     set_github_release(
-      repository_name: "ilyabochkov1331801/Weather-SwiftUI-Combine",
-      api_token: "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",
-      name: ENV["TAG"],
-      tag_name: ENV["TAG"],
+      repository_name: repoName,
+      api_token: apiToken,
+      name: release_tag,
+      tag_name: release_tag,
       description: releaseDescription
     )
+  end
+
+######################### DEPLOYMENT #########################
+
+  desc "Submit a new App Store Build to TestFlight"
+  lane :submit_prod_build do
+    prepare_master
+    match(
+      type: "appstore",
+      readonly: true
+      )
+    cocoapods
+    gym(
+      scheme: release_scheme,
+      clean: true
+    )
+    pilot
   end
 
 end
