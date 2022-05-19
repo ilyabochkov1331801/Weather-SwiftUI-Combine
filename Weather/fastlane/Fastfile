@@ -33,7 +33,7 @@ platform :ios do
 
   desc "Check if dev is current git branch"
   private_lane :check_dev_branch do
-    if git_branch != "dev"
+    if git_branch != "develop"
       UI.user_error! "Error: Please checkout dev branch"
     end
   end
