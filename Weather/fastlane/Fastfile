@@ -63,7 +63,6 @@ platform :ios do
     check_master_branch
     add_tag
     release_tag
-    run_all_tests
   end
 
   desc "Check if master is current git branch"
