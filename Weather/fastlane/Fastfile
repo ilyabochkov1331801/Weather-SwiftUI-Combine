@@ -3,7 +3,7 @@
 default_platform(:ios)
 
 repoName = "ilyabochkov1331801/Weather-SwiftUI-Combine"
-apiToken = "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"
+apiToken = "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"
 project = "Weather.xcodeproj"
 release_scheme = "Weather"
 release_tag = ""
@@ -62,7 +62,7 @@ platform :ios do
   lane :prepare_master do
     check_master_branch
     add_tag
-    release_tag
+    make_release_tag
   end
 
   desc "Check if master is current git branch"
@@ -87,7 +87,7 @@ platform :ios do
   end
 
   desc "Make release tag"
-  private_lane :release_tag do
+  private_lane :make_release_tag do
     releaseDescription = prompt(
       text: "Release tag description: ",
       multi_line_end_keyword: "END"
