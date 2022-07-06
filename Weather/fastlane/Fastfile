@@ -3,8 +3,8 @@
 default_platform(:ios)
 
 repoName = "ilyabochkov1331801/Weather-SwiftUI-Combine"
-apiToken = "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"
-project = "Weather.xcodeproj"
+apiToken = "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"
+XCODEPROJ = 'Weather.xcodeproj'
 release_scheme = "Weather"
 release_tag = ""
 
@@ -58,28 +58,28 @@ platform :ios do
 
   ######################### MAIN BRANCH ACTIONS #########################
 
-  desc "Release actions on master branch"
-  lane :prepare_master do |options|
-    check_master_branch
+  desc "Release actions on main branch"
+  lane :prepare_main do |options|
+    check_main_branch
     add_tag
     make_release_tag(
-      api_token: options[:api_token]
+      api_token: options[:apiToken]
     )
   end
 
-  desc "Check if master is current git branch"
-  private_lane :check_master_branch do
+  desc "Check if main is current git branch"
+  private_lane :check_main_branch do
     if git_branch != "master"
-      UI.user_error! "Error: Please checkout master branch"
+      UI.user_error! "Error: Please checkout main branch"
     end
   end
 
   desc "Add git tag"
-  private_lane :add_tag do
+  private_lane :add_tag do |options|
     tagMessage = prompt(
       text: "Tag message: "
     )
-    version = get_version_number(xcodeproj: project)
+    version = get_version_number(xcodeproj: XCODEPROJ)
     add_git_tag(
       tag: "v" + version,
       message: tagMessage
@@ -89,14 +89,14 @@ platform :ios do
   end
 
   desc "Make release tag"
-  private_lane :make_release_tag do |options|
+  private_lane :make_release_tag do
     releaseDescription = prompt(
       text: "Release tag description: ",
       multi_line_end_keyword: "END"
     )
     set_github_release(
       repository_name: repoName,
-      api_token: options[:api_token],
+      api_token: options[:apiToken],
       name: release_tag,
       tag_name: release_tag,
       description: releaseDescription
