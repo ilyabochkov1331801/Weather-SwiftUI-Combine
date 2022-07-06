@@ -34,13 +34,13 @@ Release preparation on dev branch
   1. bump_type - The type of this version bump. Available: patch, minor, major (ex. bump_type:patch) (optional)
   2. version - Specific app version (ex. version:1.0.3) (optional)
 
-### ios prepare_master
+### ios prepare_main
 
 ```sh
-[bundle exec] fastlane ios prepare_master
+[bundle exec] fastlane ios prepare_main
 ```
 
-Release actions on master branch
+Release actions on main branch
 
 ### ios submit_prod_build
 
