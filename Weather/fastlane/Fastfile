@@ -107,7 +107,9 @@ platform :ios do
 
   desc "Submit a new App Store Build to TestFlight"
   lane :submit_prod_build do
-    prepare_master
+    prepare_main(
+      api_token: options[:apiToken]
+    )
     match(
       type: "appstore",
       readonly: true
