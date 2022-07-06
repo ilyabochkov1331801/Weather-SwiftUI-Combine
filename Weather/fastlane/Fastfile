@@ -63,7 +63,7 @@ platform :ios do
     check_main_branch
     add_tag
     make_release_tag(
-      api_token: options[:apiToken],
+      api_token: options[:apiToken]
     )
   end
 
